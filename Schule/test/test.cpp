@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     }
     for (int r = 0; r < v.size(); r++) {
         if (v[r] == "hallo") {
-            cout << r << "ist hallo";
+            cout << r << " ist hallo"<<endl;
         }
     }
 }
