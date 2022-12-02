@@ -16,15 +16,17 @@ int main(int argc, char* argv[])
 {
     int t = 0;
     string pas, nam,tempp,tempn;
+    
     string namen = "";
     string passw = "";
-
-    ifstream MyReadFile("pas.txt");
-    getline(MyReadFile, passw);
-    MyReadFile.close();
-    ifstream MyReadFilee("nam.txt");
-    getline(MyReadFilee, namen);
+    
+    string in = "";
+    ifstream MyReadFilee("in.txt");
+    getline(MyReadFilee, in);
     MyReadFilee.close();
+    vector<string> tall = explode("°", in);
+    passw = tall[1];
+    namen = tall[0];
 
 
     cout << "Name: ";
@@ -33,10 +35,12 @@ int main(int argc, char* argv[])
     cin >> pas;
     vector<string> p = explode("-", passw);
     vector<string> n = explode("-", namen);
+    
     for (int i = 0; i < p.size(); i++)
     {
         tempp = p[i];
         tempn = n[i];
+        
         if ( tempp== pas && tempn == nam) {
             cout << "richtig";
             t = 1;
