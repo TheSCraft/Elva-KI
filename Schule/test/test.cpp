@@ -14,15 +14,18 @@ int main(int argc, char* argv[])
     cin >> m;
     getline(cin, t);
     str = m + t;
-
-
-
-
     cout << str << endl;
     vector<string> v = explode(" ", str);
-    for (int i = 0; i < v.size(); i++)
+    for (int i = 0; i < v.size(); i++) {
         cout << i << " [" << v[i] << "] " << endl;
+    }
+    for (int r = 0; r < v.size(); r++) {
+        if (v[r] == "hallo") {
+            cout << r << "ist hallo";
+        }
+    }
 }
+
 
 vector<string> explode(const string& delimiter, const string& str)
 {
