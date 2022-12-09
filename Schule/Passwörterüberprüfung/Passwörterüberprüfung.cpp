@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
     
     string namen = "";
     string passw = "";
-    
     string in = "";
     ifstream MyReadFilee("in.txt");
     getline(MyReadFilee, in);
