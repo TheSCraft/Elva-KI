@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "passund registration", "pas
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypt", "crypt\crypt.vcxproj", "{D4D227AE-E138-4F5D-A85F-69155148193D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cache orga", "Cache orga\Cache orga.vcxproj", "{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{D4D227AE-E138-4F5D-A85F-69155148193D}.Release|x64.Build.0 = Release|x64
 		{D4D227AE-E138-4F5D-A85F-69155148193D}.Release|x86.ActiveCfg = Release|Win32
 		{D4D227AE-E138-4F5D-A85F-69155148193D}.Release|x86.Build.0 = Release|Win32
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Debug|x64.ActiveCfg = Debug|x64
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Debug|x64.Build.0 = Debug|x64
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Debug|x86.ActiveCfg = Debug|Win32
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Debug|x86.Build.0 = Debug|Win32
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Release|x64.ActiveCfg = Release|x64
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Release|x64.Build.0 = Release|x64
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Release|x86.ActiveCfg = Release|Win32
+		{D93F9508-0F3A-4D45-BB97-0D9286FBA51F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
