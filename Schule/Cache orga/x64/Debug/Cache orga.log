@@ -1,4 +1,4 @@
 ﻿  Cache orga.cpp
-C:\c++projekt\Schule\Schule\Cache orga\Cache orga.cpp(180,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\c++projekt\Schule\Schule\Cache orga\Cache orga.cpp(181,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Schule\Schule\Cache orga\Cache orga.cpp(197,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Schule\Schule\Cache orga\Cache orga.cpp(198,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
   Cache orga.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\Cache orga.exe

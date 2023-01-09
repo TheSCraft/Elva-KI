@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
         cout << "Cache" << endl;
         cout << "Einen neuer eintrag (1)" << endl;
         cout << "Datei auslesen (2)" << endl;
-        cout << "Neue Einträge (3)" << endl;
+        cout << "Neue Eintraege (3)" << endl;
         cout << "Exit (4)" << endl;
         cin >> chose;
         
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
             else if (chosee == 2) {
                 art = "Lab";
             }
-        
+
             else {
                 cout << "Error bitte Nur 1 oder 2 Eingeben";
                 continue;
@@ -147,7 +147,9 @@ int main(int argc, char* argv[])
                 }
                 else if (chosee == 4) {
                     while (true) {
+                        cout << "Eingabe:";
                         cin >> num;
+                        cout << endl;
                         if (num == "EXIT")break;
                         art = "Lab";
                         newe = "\n" + art + num + "," + dat + "T22:30Z,Found it,'" + anzahl + "'";
@@ -170,7 +172,7 @@ int main(int argc, char* argv[])
                 }
               
 
-                else {
+                else { //do not function
                     cout << "Error bitte Nur 1 bis 5 Eingeben";
                     continue;
                 }

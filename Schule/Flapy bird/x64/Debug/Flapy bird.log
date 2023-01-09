@@ -1,0 +1,7 @@
+﻿  Flapy bird.cpp
+C:\c++projekt\Schule\Schule\Flapy bird\Flapy bird.cpp(31,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\c++projekt\Schule\Schule\Flapy bird\Flapy bird.cpp(45,16): warning C4101: "b": Unreferenzierte lokale Variable
+C:\c++projekt\Schule\Schule\Flapy bird\Flapy bird.cpp(127,19): warning C4244: "Argument": Konvertierung von "double" in "DWORD", möglicher Datenverlust
+C:\c++projekt\Schule\Schule\Flapy bird\Flapy bird.cpp(314,12): warning C4101: "y": Unreferenzierte lokale Variable
+C:\c++projekt\Schule\Schule\Flapy bird\Flapy bird.cpp(314,9): warning C4101: "x": Unreferenzierte lokale Variable
+  Flapy bird.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\Flapy bird.exe
