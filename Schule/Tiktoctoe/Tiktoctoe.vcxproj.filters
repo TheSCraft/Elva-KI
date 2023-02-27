@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="passwörter.cpp">
+    <ClCompile Include="Tiktoctoe.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

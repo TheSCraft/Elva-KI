@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ad2047c5-9426-4900-8d9c-8ed4e54c5616}</ProjectGuid>
-    <RootNamespace>passwörter</RootNamespace>
+    <ProjectGuid>{d9b3da87-1a95-4d41-aa43-76c939f944f1}</ProjectGuid>
+    <RootNamespace>Tiktoctoe</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="passwörter.cpp" />
+    <ClCompile Include="Tiktoctoe.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
