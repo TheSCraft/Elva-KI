@@ -1,4 +1,0 @@
-﻿  passund registration.cpp
-C:\c++projekt\Schule\Schule\passund registration\passund registration.cpp(81,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\c++projekt\Schule\Schule\passund registration\passund registration.cpp(82,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-  passund registration.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\passund registration.exe
