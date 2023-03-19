@@ -1,0 +1,4 @@
+﻿  Neuronal1.cpp
+C:\c++projekt\Schule\Schule\Neuronal1\Neuronal1.cpp(298,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Schule\Schule\Neuronal1\Neuronal1.cpp(299,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  Neuronal1.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\Neuronal1.exe
