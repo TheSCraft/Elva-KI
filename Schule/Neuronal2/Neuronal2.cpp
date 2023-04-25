@@ -1,10 +1,12 @@
-#include <stdio.h>
+  #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 vector<string> explode(const string& delimiter, const string& explodeme);
@@ -127,11 +129,11 @@ int main() {
         MyReadFilee.close();
         vector<string> inn = explode("|", in);
         cout << "Versteckte Weights eins" << endl;
-        for (int i = 0; i < anzahleingangsneuronen; i++) {
-            for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
-                versteckteWeightseins[i][j] = stod(inn[tempp]);
+        for (int i = 0; i < anzahlversteckterneuroneneins; i++) {
+            for (int j = 0; j < anzahleingangsneuronen; j++) {
+                versteckteWeightseins[j][i] = stod(inn[tempp]);
                 tempp++;
-                cout << versteckteWeightseins[i][j] << endl;
+                cout << fixed <<setprecision(15)<< versteckteWeightseins[j][i] << endl;
             }
         }
         cout << "versteckte Bias eins" << endl;
@@ -144,11 +146,11 @@ int main() {
 
         }
         cout << "Versteckte Weights zwei" << endl;
-        for (int i = 0; i < anzahlversteckterneuroneneins; i++) {
-            for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
-                versteckteWeightszwei[i][j] = stod(inn[tempp]);
+        for (int i = 0; i < anzahlversteckterneuronenzwei; i++) {
+            for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
+                versteckteWeightszwei[j][i] = stod(inn[tempp]);
                 tempp++;
-                cout << versteckteWeightszwei[i][j] << endl;
+                cout << versteckteWeightszwei[j][i] << endl;
             }
         }
         cout << "versteckte Bias zwei" << endl;
@@ -166,9 +168,9 @@ int main() {
             for (int j = 0; j < anzahlausgangsneuronen; j++) {
 
 
-                ausgangsWeights[i][j] = stod(inn[tempp]);
+                ausgangsWeights[j][i] = stod(inn[tempp]);
                 tempp++;
-                cout << ausgangsWeights[i][j] << endl;
+                cout << ausgangsWeights[j][i] << endl;
 
             }
         }
@@ -278,7 +280,7 @@ int main() {
             cout << "Input: ";
             for (int w = 0; w < anzahleingangsneuronen; w++)
             {
-                cout << training_inputs[i][w] << " ";
+                cout << fixed << setprecision(2) << training_inputs[i][w] << " ";
             }
             cout << " Output: ";
             for (int q = 0; q < anzahlausgangsneuronen; q++)
@@ -346,22 +348,24 @@ int main() {
             }
         }
     }
+    
 
+   
+    stringstream finalewete;
+    finalewete << fixed << setprecision(15);
 
-
-    string finalewete = "";
     cout << "Finale Vesteckte Weights erste ebene\n[";
     for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
 
         for (int k = 0; k < anzahleingangsneuronen; k++) {
-            cout << "[" << versteckteWeightseins[k][j] << "]";
-            finalewete += to_string(versteckteWeightseins[k][j]) + '|';
+            cout << "[" << fixed << setprecision(15) << versteckteWeightseins[k][j] << "]";
+            finalewete <<versteckteWeightseins[k][j]<< '|';
         }
     }
     cout << "]\nFinal Versteckte Biases erste ebene\n[";
     for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
         cout << "[" << versteckteebeneeinsBias[j] << "]";
-        finalewete += to_string(versteckteebeneeinsBias[j]) + '|';
+        finalewete <<versteckteebeneeinsBias[j] << '|';
     }
 
     cout << "]\nFinale Vesteckte Weights zweite ebene\n[";
@@ -369,13 +373,13 @@ int main() {
 
         for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
             cout << "[" << versteckteWeightszwei[k][j] << "]";
-            finalewete += to_string(versteckteWeightszwei[k][j]) + '|';
+            finalewete << versteckteWeightszwei[k][j] << '|';
         }
     }
     cout << "]\nFinal Versteckte Biases zweite ebene\n[";
     for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
         cout << "[" << versteckteebenezweiBias[j] << "]";
-        finalewete += to_string(versteckteebenezweiBias[j]) + '|';
+        finalewete <<versteckteebenezweiBias[j]<< '|';
     }
 
     cout << "]\nFinal Output Weights\n";
@@ -383,7 +387,7 @@ int main() {
         cout << "[";
         for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
             cout << "[" << ausgangsWeights[k][j] << "]";
-            finalewete += to_string(ausgangsWeights[k][j]) + '|';
+            finalewete <<ausgangsWeights[k][j]<< '|';
 
         }
         cout << "]\n";
@@ -392,7 +396,7 @@ int main() {
     cout << "Final Output Biases\n[";
     for (int j = 0; j < anzahlausgangsneuronen; j++) {
         cout << "[" << ausgangsebeneBias[j] << "]";
-        finalewete += to_string(ausgangsebeneBias[j]) + '|';
+        finalewete <<ausgangsebeneBias[j]<< '|';
     }
 
     cout << "]\n";
@@ -402,9 +406,10 @@ int main() {
         cout << "dateiname:";
         cin >> datein;
         datein += ".txt";
-        cout << finalewete;
+        string sf = finalewete.str();
+        cout << sf;
         ofstream MyReadFilee(datein);
-        MyReadFilee << finalewete;
+        MyReadFilee << sf;
         MyReadFilee.close();
     }
     return 0;

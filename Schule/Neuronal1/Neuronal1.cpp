@@ -37,10 +37,10 @@ int main() {
                                                                             {1.0,0.0},
                                                                             {0.0,1.0},
                                                                             {1.0,1.0} };
-    double training_outputs[anzahltraningsdaten][anzahlausgangsneuronen] = { {0.2},
-                                                                             {0.5},
-                                                                             {0.7},
-                                                                             {1.0} };
+    double training_outputs[anzahltraningsdaten][anzahlausgangsneuronen] = { {0.0},
+                                                                             {1.0},
+                                                                             {1.0},
+                                                                             {0.0} };
     int temp = 0;
     string datein;
     cout << "Manuelle eingabe? 1ja 2nein 3ladevorherige werte"<<endl;

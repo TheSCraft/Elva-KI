@@ -1,0 +1,3 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: Das Zwischenverzeichnis (C:\c++projekt\imgui-docking\examples\example_win32_directx12\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (example_win32_directx12.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
+  main.cpp
+  example_win32_directx12.vcxproj -> C:\c++projekt\imgui-docking\examples\example_win32_directx12\Debug\GUI.exe
