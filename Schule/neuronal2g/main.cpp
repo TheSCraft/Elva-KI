@@ -696,31 +696,31 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         t = datein;
         t += "we.bin";
         std::ifstream inputFile(t, std::ios::in | std::ios::binary);
-        inputFile.read(reinterpret_cast<char*>(versteckteWeightseins), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFile.read(reinterpret_cast<char*>(versteckteWeightseins), anzahleingangsneuronen * anzahlversteckterneuroneneins * sizeof(double));
         inputFile.close();
         t = datein;
         t += "be.bin";
         std::ifstream inputFilee(t, std::ios::in | std::ios::binary);
-        inputFilee.read(reinterpret_cast<char*>(versteckteebeneeinsBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFilee.read(reinterpret_cast<char*>(versteckteebeneeinsBias), anzahlversteckterneuroneneins * sizeof(double));
         inputFilee.close();
         t = datein;
         t += "wz.bin";
         std::ifstream inputFileee(t, std::ios::in | std::ios::binary);
-        inputFileee.read(reinterpret_cast<char*>(versteckteWeightszwei), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFileee.read(reinterpret_cast<char*>(versteckteWeightszwei), anzahlversteckterneuroneneins * anzahlversteckterneuronenzwei * sizeof(double));
         inputFileee.close();
         t = datein;
         t += "bz.bin";
         std::ifstream inputFileeee(t, std::ios::in | std::ios::binary);
-        inputFileeee.read(reinterpret_cast<char*>(versteckteebenezweiBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFileeee.read(reinterpret_cast<char*>(versteckteebenezweiBias), anzahlversteckterneuronenzwei * sizeof(double));
         inputFileeee.close();
         t = datein;
         t += "wa.bin";
         std::ifstream inputFileeeee(t, std::ios::in | std::ios::binary);
-        inputFileeeee.read(reinterpret_cast<char*>(ausgangsWeights), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFileeeee.read(reinterpret_cast<char*>(ausgangsWeights), anzahlausgangsneuronen * anzahlversteckterneuronenzwei * sizeof(double));
         inputFileeeee.close(); t = datein;
         t += "ba.bin";
         std::ifstream inputFileeeeee(t, std::ios::in | std::ios::binary);
-        inputFileeeeee.read(reinterpret_cast<char*>(ausgangsebeneBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        inputFileeeeee.read(reinterpret_cast<char*>(ausgangsebeneBias), anzahlausgangsneuronen * sizeof(double));
         inputFileeeeee.close();
     }
 
@@ -769,23 +769,15 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 ausgangsebene[j] = sigmoid(activation);
             }
 
-
-
             cout << " Output: ";
             for (int q = 0; q < anzahlausgangsneuronen; q++)
             {
                 cout << ausgangsebene[q] << " ";
             }
 
-
-
-
-
         }
 
-
     }
-
 
     //training
     for (int zyclus = 0; zyclus < anzahllernzyclen; zyclus++) {
@@ -945,12 +937,12 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         t = datein;
         t += "we.bin";
         std::ofstream outputFile(t, std::ios::out | std::ios::binary);
-        outputFile.write(reinterpret_cast<char*>(versteckteWeightseins), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        outputFile.write(reinterpret_cast<char*>(versteckteWeightseins), anzahlversteckterneuroneneins* anzahleingangsneuronen * sizeof(double));
         outputFile.close();
         t = datein;
         t += "be.bin";
         std::ofstream outputFilee(t, std::ios::out | std::ios::binary);
-        outputFilee.write(reinterpret_cast<char*>(versteckteebeneeinsBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        outputFilee.write(reinterpret_cast<char*>(versteckteebeneeinsBias), anzahlversteckterneuroneneins * sizeof(double));
         outputFilee.close();
         t = datein;
         t += "wz.bin";
@@ -960,16 +952,16 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         t = datein;
         t += "bz.bin";
         std::ofstream outputFileeee(t, std::ios::out | std::ios::binary);
-        outputFileeee.write(reinterpret_cast<char*>(versteckteebenezweiBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        outputFileeee.write(reinterpret_cast<char*>(versteckteebenezweiBias), anzahlversteckterneuronenzwei * sizeof(double));
         outputFileeee.close();
         t = datein;
         t += "wa.bin";
         std::ofstream outputFileeeee(t, std::ios::out | std::ios::binary);
-        outputFileeeee.write(reinterpret_cast<char*>(ausgangsWeights), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        outputFileeeee.write(reinterpret_cast<char*>(ausgangsWeights), anzahlausgangsneuronen* anzahlversteckterneuronenzwei * sizeof(double));
         outputFileeeee.close(); t = datein;
         t += "ba.bin";
         std::ofstream outputFileeeeee(t, std::ios::out | std::ios::binary);
-        outputFileeeeee.write(reinterpret_cast<char*>(ausgangsebeneBias), anzahlversteckterneuroneneins* anzahlversteckterneuronenzwei * sizeof(double));
+        outputFileeeeee.write(reinterpret_cast<char*>(ausgangsebeneBias), anzahlausgangsneuronen * sizeof(double));
         outputFileeeeee.close();
     }
 
