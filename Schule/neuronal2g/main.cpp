@@ -64,6 +64,10 @@ void WaitForLastSubmittedFrame();
 FrameContext* WaitForNextFrameResources();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+constexpr auto anzahleingangsneuronen = 26;
+constexpr auto anzahlausgangsneuronen = 2;
+constexpr auto anzahltraningsdaten = 26;
+constexpr auto sim = 25;
 // Main code
 int main(int, char**)
 {
@@ -179,8 +183,8 @@ int main(int, char**)
                 ImGui::EndPopup();
             }
             ImGui::DragInt("Trainigszyklen", &zyklen, groe, 0, 9999999);
-            ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, 100);
-            ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, 100);
+            ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, sim);
+            ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
             ImGui::Checkbox("Nur testen", &zur);
             static char buf[64] = ""; ImGui::InputText("default", buf, 64);
             string simon=buf;
@@ -551,20 +555,18 @@ vector<string> explode(const string& delimiter, const string& str)
     return arr;
 }
 
-constexpr auto anzahleingangsneuronen = 26;
-constexpr auto anzahlausgangsneuronen = 2;
-constexpr auto anzahltraningsdaten = 26;
+
 void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein) {
     
-    double versteckteebeneeins[50]{};
-    double versteckteebenezwei[50]{};
+    double versteckteebeneeins[sim]{};
+    double versteckteebenezwei[sim]{};
     double ausgangsebene[2]{};
-    double versteckteebeneeinsBias[50]{};
-    double versteckteebenezweiBias[50]{};
+    double versteckteebeneeinsBias[sim]{};
+    double versteckteebenezweiBias[sim]{};
     double ausgangsebeneBias[2]{};
-    double versteckteWeightseins[26][50]{};
-    double versteckteWeightszwei[50][50]{};
-    double ausgangsWeights[50][2]{};
+    double versteckteWeightseins[26][sim]{};
+    double versteckteWeightszwei[sim][sim]{};
+    double ausgangsWeights[sim][2]{};
 
     double training_inputs[anzahltraningsdaten][26] = { {1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
                                                                             {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
@@ -667,19 +669,19 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
 
     if (ein == 2) {
         for (int i = 0; i < anzahleingangsneuronen; i++) {
-            for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
+            for (int j = 0; j < sim; j++) {
                 versteckteWeightseins[i][j] = zufallszahl();
             }
         }
-        for (int i = 0; i < anzahlversteckterneuroneneins; i++) {
+        for (int i = 0; i < sim; i++) {
             versteckteebeneeinsBias[i] = zufallszahl();
 
-            for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
+            for (int j = 0; j < sim; j++) {
                 versteckteWeightszwei[i][j] = zufallszahl();
             }
         }
 
-        for (int i = 0; i < anzahlversteckterneuronenzwei; i++) {
+        for (int i = 0; i < sim; i++) {
             versteckteebenezweiBias[i] = zufallszahl();
             for (int j = 0; j < anzahlausgangsneuronen; j++) {
                 ausgangsWeights[i][j] = zufallszahl();
@@ -722,7 +724,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         inputFileeeeee.close();
     }
 
-    int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
+       int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
    
     int temp=0;
    
@@ -850,13 +852,13 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 double errorOutput = (training_outputs[i][j] - ausgangsebene[j]);
                 deltaOutput[j] = errorOutput * dSigmoid(ausgangsebene[j]);
             }
-            double deltaOutputz[50]{};
+            double deltaOutputz[sim]{};
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 double errorOutputz = (training_outputs[i][anzahlausgangsneuronen - 1] - versteckteebenezwei[j]);
                 deltaOutputz[j] = errorOutputz * dSigmoid(versteckteebenezwei[j]);
             }
 
-            double deltaHiddenzwei[50]{};
+            double deltaHiddenzwei[sim]{};
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 double errorHidden = 0.0;
                 for (int k = 0; k < anzahlausgangsneuronen; k++) {
@@ -865,7 +867,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 deltaHiddenzwei[j] = errorHidden * dSigmoid(versteckteebenezwei[j]);
             }
 
-            double deltaHiddeneins[50]{};
+            double deltaHiddeneins[sim]{};
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 double errorHidden = 0.0;
                 for (int k = 0; k < anzahlversteckterneuronenzwei; k++) {
@@ -939,6 +941,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     cout << "Speichern? 1ja 2nein" << endl;
     cin >> temp;
     if (temp == 1) {
+        
         t = datein;
         t += "we.bin";
         std::ofstream outputFile(t, std::ios::out | std::ios::binary);

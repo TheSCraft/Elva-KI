@@ -262,7 +262,7 @@ int main() {
         inputFileeeeee.close();
     }
 
-    int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
+     int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
     cout << "Training?  1ja  2nein";
     cin >> temp;
     if (temp == 2) {
@@ -439,21 +439,20 @@ int main() {
 
 
 
-    stringstream finalewete;
-    finalewete << fixed << setprecision(15);
+    
 
     cout << "Finale Vesteckte Weights erste ebene\n[";
     for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
 
         for (int k = 0; k < anzahleingangsneuronen; k++) {
             cout << "["  << versteckteWeightseins[k][j] << "]";
-            finalewete << versteckteWeightseins[k][j] << '|';
+           
         }
     }
     cout << "]\nFinal Versteckte Biases erste ebene\n[";
     for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
         cout << "[" << versteckteebeneeinsBias[j] << "]";
-        finalewete << versteckteebeneeinsBias[j] << '|';
+        
     }
 
     cout << "]\nFinale Vesteckte Weights zweite ebene\n[";
@@ -461,13 +460,13 @@ int main() {
 
         for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
             cout << "[" << versteckteWeightszwei[k][j] << "]";
-            finalewete << versteckteWeightszwei[k][j] << '|';
+           
         }
     }
     cout << "]\nFinal Versteckte Biases zweite ebene\n[";
     for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
         cout << "[" << versteckteebenezweiBias[j] << "]";
-        finalewete << versteckteebenezweiBias[j] << '|';
+        
     }
 
     cout << "]\nFinal Output Weights\n";
@@ -475,7 +474,7 @@ int main() {
         cout << "[";
         for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
             cout << "[" << ausgangsWeights[k][j] << "]";
-            finalewete << ausgangsWeights[k][j] << '|';
+            
 
         }
         cout << "]\n";
@@ -484,7 +483,7 @@ int main() {
     cout << "Final Output Biases\n[";
     for (int j = 0; j < anzahlausgangsneuronen; j++) {
         cout << "[" << ausgangsebeneBias[j] << "]";
-        finalewete << ausgangsebeneBias[j] << '|';
+        
     }
 
     cout << "]\n";
