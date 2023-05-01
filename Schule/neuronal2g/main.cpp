@@ -67,7 +67,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlausgangsneuronen = 2;
 constexpr auto anzahltraningsdaten = 26;
-constexpr auto sim = 25;
+constexpr auto sim = 100;
 // Main code
 int main(int, char**)
 {
@@ -160,10 +160,10 @@ int main(int, char**)
             
            ImGui::Checkbox("Einstellungen", &show_another_window);
           
-           if (ImGui::Button("Tastatur Eingabe"))ImGui::SetKeyboardFocusHere();
-            ImGui::SliderFloat("Lerngenauigkeit", &f, 0.0f, 1.0f); 
-            ImGui::SameLine();
-            ImGui::Text("Lerngenauigkeit = %f", f);
+           if (!zur)if (ImGui::Button("Tastatur Eingabe"))ImGui::SetKeyboardFocusHere();
+           if (!zur)ImGui::SliderFloat("Lerngenauigkeit", &f, 0.0f, 1.0f);
+            if (!zur)ImGui::SameLine();
+            if(!zur)ImGui::Text("Lerngenauigkeit = %f", f);
 
             static int art = -1;
             const char* names[] = { "Manuell", "Zufaellig", "Laden" };
@@ -182,10 +182,12 @@ int main(int, char**)
                         art = i;
                 ImGui::EndPopup();
             }
-            ImGui::DragInt("Trainigszyklen", &zyklen, groe, 0, 9999999);
+
+            if(!zur)ImGui::DragInt("Trainigszyklen", &zyklen, groe, 0, 9999999);
             ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, sim);
             ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
             ImGui::Checkbox("Nur testen", &zur);
+
             static char buf[64] = ""; ImGui::InputText("default", buf, 64);
             string simon=buf;
             if (ImGui::Button("Start")) {
@@ -778,10 +780,16 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         }
 
     }
-
+    int tr = anzahllernzyclen/10,trr=0;
+   
     //training
     for (int zyclus = 0; zyclus < anzahllernzyclen; zyclus++) {
-
+        
+        trr ++;
+        if (trr == tr) {
+            trr = 0;
+            cout << "-";
+        }
         // das training zufällig machen
         mischen(reinfolgetrainingsdaten, anzahltraningsdaten);
 
@@ -817,7 +825,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 ausgangsebene[j] = sigmoid(activation);
             }
 
-
+            /*
             cout << "Input: ";
             for (int w = 0; w < anzahleingangsneuronen; w++)
             {
@@ -834,7 +842,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 cout << training_outputs[i][w] << " ";
             }
             cout << " |" << (zyclus * 100) / anzahllernzyclen << "%" << endl;
-
+            */
 
             // Backprop
 
