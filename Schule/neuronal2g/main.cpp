@@ -20,7 +20,7 @@ double sigmoid(double x);
 double dSigmoid(double x);
 double zufallszahl();
 void mischen(int* array, size_t n);
-void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein);
+void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c);
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
 #endif
@@ -68,6 +68,8 @@ constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlausgangsneuronen = 2;
 constexpr auto anzahltraningsdaten = 26;
 constexpr auto sim = 100;
+double outputone = 0;
+double outputtwo = 0;
 // Main code
 int main(int, char**)
 {
@@ -126,6 +128,7 @@ int main(int, char**)
 
     // Main loop
     bool done = false;
+    bool acktivwin = false;
     while (!done)
     {
        
@@ -188,17 +191,35 @@ int main(int, char**)
             ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
             ImGui::Checkbox("Nur testen", &zur);
 
-            static char buf[64] = ""; ImGui::InputText("default", buf, 64);
+            static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
             if (ImGui::Button("Start")) {
-                art++;
-                neuro(f,art,zur,zyklen,einsneur,zweineuro,simon);
+                if (!zur) {
+                    art++;
+                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL);
+                }
+                if (zur) {
+                    acktivwin = true;
+                }
             }
             ImGui::SameLine();
-            
-
             ImGui::End();
-            
+
+            if (acktivwin)
+            {
+                ImGui::Begin("Training/,Test", &acktivwin);
+                ImGui::Text("Training");
+                static char in[64] = ""; ImGui::InputText("Input", in, 64);
+                char inn = in[0];
+                if (ImGui::Button("Test"))
+                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn);
+                ImGui::Text("Output1: %f" ,outputone);
+                ImGui::Text("Output2: %f" ,outputtwo);
+
+                if (ImGui::Button("Schliesen"))
+                    acktivwin = false;
+                ImGui::End();
+            }
         }
 
         if (show_another_window)
@@ -212,6 +233,7 @@ int main(int, char**)
                 show_another_window = false;
             ImGui::End();
         }
+        
 
         // Rendering
         ImGui::Render();
@@ -558,7 +580,7 @@ vector<string> explode(const string& delimiter, const string& str)
 }
 
 
-void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein) {
+void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c) {
     
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
@@ -731,14 +753,8 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     int temp=0;
    
     if (trai) {
-        char c = 'a';
-
-        while (true) {
             int w = 0;
-            cout << "Inputs:" << endl;
 
-
-            cin >> c;
             w = (c - 97);
             cout << w << endl;
             cout << "Input: ";
@@ -776,8 +792,10 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             {
                 cout << ausgangsebene[q] << " ";
             }
+            outputone = ausgangsebene[0];
+            outputtwo = ausgangsebene[1];
 
-        }
+            return;
 
     }
     int tr = anzahllernzyclen/10,trr=0;
@@ -973,7 +991,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         outputFileeeeee.close();
     }
 
-    char c = 'a';
+    //char c = 'a';
     while (true) {
         int w = 0;
         cout << "Inputs:" << endl;
@@ -1022,3 +1040,4 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     }
     
 }
+
