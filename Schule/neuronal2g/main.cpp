@@ -195,7 +195,7 @@ int main(int, char**)
             string simon=buf;
             if (ImGui::Button("Start")) {
                 if (!zur) {
-                    art++;
+                    
                     neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL);
                 }
                 if (zur) {
@@ -212,6 +212,7 @@ int main(int, char**)
                 static char in[64] = ""; ImGui::InputText("Input", in, 64);
                 char inn = in[0];
                 if (ImGui::Button("Test"))
+                    
                     neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn);
                 ImGui::Text("Output1: %f" ,outputone);
                 ImGui::Text("Output2: %f" ,outputtwo);
@@ -581,7 +582,7 @@ vector<string> explode(const string& delimiter, const string& str)
 
 
 void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c) {
-    
+
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
     double ausgangsebene[2]{};
@@ -650,7 +651,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     
     
 
-    if (ein == 1) {
+    if (ein == 0) {
         cout << "Versteckte Weights eins" << endl;
         for (int i = 0; i < anzahleingangsneuronen; i++) {
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
@@ -691,7 +692,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         }
     }
 
-    if (ein == 2) {
+    if (ein == 1) {
         for (int i = 0; i < anzahleingangsneuronen; i++) {
             for (int j = 0; j < sim; j++) {
                 versteckteWeightseins[i][j] = zufallszahl();
@@ -716,7 +717,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         }
     }
     string t;
-    if (ein == 3) {
+    if (ein == 2) {
         t = datein;
         t += "we.bin";
         std::ifstream inputFile(t, std::ios::in | std::ios::binary);
