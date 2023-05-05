@@ -1,0 +1,209 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"+\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"+\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+                },
+                "region": {
+                  "startLine": 569,
+                  "startColumn": 54,
+                  "endLine": 569,
+                  "endColumn": 58
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "explode",
+                  "decoratedName": "?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"-\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"-\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+                },
+                "region": {
+                  "startLine": 573,
+                  "startColumn": 41,
+                  "endLine": 573,
+                  "endColumn": 45
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "explode",
+                  "decoratedName": "?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"-\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"-\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+                },
+                "region": {
+                  "startLine": 582,
+                  "startColumn": 33,
+                  "endLine": 582,
+                  "endColumn": 37
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "explode",
+                  "decoratedName": "?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Die Funktion verwendet „117676“ Bytes Stapel.  Erwägen Sie, einige Daten in einen Heap zu verschieben."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+                },
+                "region": {
+                  "startLine": 587,
+                  "startColumn": 6,
+                  "endLine": 587,
+                  "endColumn": 6
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "neuro",
+                  "decoratedName": "?neuro@@YAXNH_NHHHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@D@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"*\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"*\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+                },
+                "region": {
+                  "startLine": 747,
+                  "startColumn": 70,
+                  "endLine": 747,
+                  "endColumn": 95
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "neuro",
+                  "decoratedName": "?neuro@@YAXNH_NHHHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@D@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32216.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/c++projekt/Schule/Schule/neuronal2g/main.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "f32fffcae20cf86e2b226f6bb7710907c385f75ff7f5ba46cdb8a0ab5df93537"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/c++projekt/schule/schule/neuronal2g/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "d2a01735e6ebab80142c2414fa6f182fbcada9642ef49ca23ab10ce3198ccaed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/c++projekt/schule/schule/neuronal2g/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "c51306af988faf60a79adab9933472e08de161cca54e0ab37824a56435a69fd0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/c++projekt/schule/schule/neuronal2g/imgui_impl_win32.h"
+          },
+          "hashes": {
+            "sha-256": "e6cf32f1374512903e2196e8194982ceee104f728aab9ea694960a610125894c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/c++projekt/schule/schule/neuronal2g/imgui_impl_dx12.h"
+          },
+          "hashes": {
+            "sha-256": "2905b626d86cd4c2e746e7924689ec113f874342d985cd3f994e7d6a6f4ae233"
+          }
+        }
+      ]
+    }
+  ]
+}

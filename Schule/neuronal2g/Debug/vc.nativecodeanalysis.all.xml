@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>C:\c++projekt\Schule\Schule\neuronal2g\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>569</LINE>
+      <COLUMN>55</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetischer Überlauf: Wenn Sie den Operator "+" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator "+" verwenden, um einen Überlauf zu vermeiden (io.2).</DESCRIPTION>
+    <FUNCTION>explode</FUNCTION>
+    <DECORATED>?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z</DECORATED>
+    <FUNCLINE>555</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\c++projekt\Schule\Schule\neuronal2g\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>573</LINE>
+      <COLUMN>42</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetischer Überlauf: Wenn Sie den Operator "-" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator "-" verwenden, um einen Überlauf zu vermeiden (io.2).</DESCRIPTION>
+    <FUNCTION>explode</FUNCTION>
+    <DECORATED>?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z</DECORATED>
+    <FUNCLINE>555</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\c++projekt\Schule\Schule\neuronal2g\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>582</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetischer Überlauf: Wenn Sie den Operator "-" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator "-" verwenden, um einen Überlauf zu vermeiden (io.2).</DESCRIPTION>
+    <FUNCTION>explode</FUNCTION>
+    <DECORATED>?explode@@YA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@0@Z</DECORATED>
+    <FUNCLINE>555</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\c++projekt\Schule\Schule\neuronal2g\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>587</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>6262</DEFECTCODE>
+    <DESCRIPTION>Die Funktion verwendet „117676“ Bytes Stapel.  Erwägen Sie, einige Daten in einen Heap zu verschieben.</DESCRIPTION>
+    <FUNCTION>neuro</FUNCTION>
+    <DECORATED>?neuro@@YAXNH_NHHHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@D@Z</DECORATED>
+    <FUNCLINE>587</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\c++projekt\Schule\Schule\neuronal2g\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>747</LINE>
+      <COLUMN>92</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetischer Überlauf: Wenn Sie den Operator "*" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator "*" verwenden, um einen Überlauf zu vermeiden (io.2).</DESCRIPTION>
+    <FUNCTION>neuro</FUNCTION>
+    <DECORATED>?neuro@@YAXNH_NHHHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@D@Z</DECORATED>
+    <FUNCLINE>587</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

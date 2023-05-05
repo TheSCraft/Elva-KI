@@ -1,6 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: Das Zwischenverzeichnis (C:\c++projekt\Schule\Schule\neuronal2g\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (example_win32_directx12.vcxproj, GUI.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
   main.cpp
-C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(186,63): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(533,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(534,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(191,63): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(562,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Schule\Schule\neuronal2g\main.cpp(563,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
   neuronal2g.vcxproj -> C:\c++projekt\Schule\Schule\neuronal2g\Debug\neuronal2g.exe

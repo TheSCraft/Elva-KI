@@ -20,7 +20,7 @@ double sigmoid(double x);
 double dSigmoid(double x);
 double zufallszahl();
 void mischen(int* array, size_t n);
-void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c);
+void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out);
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
 #endif
@@ -129,6 +129,8 @@ int main(int, char**)
     // Main loop
     bool done = false;
     bool acktivwin = false;
+    static int outt = 10;
+
     while (!done)
     {
        
@@ -179,7 +181,7 @@ int main(int, char**)
             ImGui::TextUnformatted(art == -1 ? "<Nichts>" : names[art]);
             if (ImGui::BeginPopup("my_select_popup"))
             {
-                ImGui::SeparatorText("Anfangswerte");
+                ImGui::SeparatorText("Anfangswerte"); 
                 for (int i = 0; i < IM_ARRAYSIZE(names); i++)
                     if (ImGui::Selectable(names[i]))
                         art = i;
@@ -190,13 +192,16 @@ int main(int, char**)
             ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, sim);
             ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
             ImGui::Checkbox("Nur testen", &zur);
+            if (zur) {
+                art = 2;
+            }
 
             static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
             if (ImGui::Button("Start")) {
                 if (!zur) {
                     
-                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL);
+                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt);
                 }
                 if (zur) {
                     acktivwin = true;
@@ -213,9 +218,9 @@ int main(int, char**)
                 char inn = in[0];
                 if (ImGui::Button("Test"))
                     
-                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn);
-                ImGui::Text("Output1: %f" ,outputone);
-                ImGui::Text("Output2: %f" ,outputtwo);
+                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn,outt);
+                ImGui::Text("Vokal: %f" ,outputone);
+                ImGui::Text("Konsonant: %f" ,outputtwo);
 
                 if (ImGui::Button("Schliesen"))
                     acktivwin = false;
@@ -229,6 +234,7 @@ int main(int, char**)
             ImGui::Text("Einstellungen");
             ImGui::ColorEdit3("clear color", (float*)&clear_color);
             ImGui::SliderInt("Genauichkeit von Zyklen", &groe, 0, 100);
+            ImGui::SliderInt("Ausgabe in prozent", &outt, 0, 100);
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             if (ImGui::Button("Schliesen"))
                 show_another_window = false;
@@ -581,7 +587,7 @@ vector<string> explode(const string& delimiter, const string& str)
 }
 
 
-void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c) {
+void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out) {
 
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
@@ -718,31 +724,38 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     }
     string t;
     if (ein == 2) {
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "we.bin";
         std::ifstream inputFile(t, std::ios::in | std::ios::binary);
         inputFile.read(reinterpret_cast<char*>(versteckteWeightseins), anzahleingangsneuronen * sim * sizeof(double));
         inputFile.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "be.bin";
         std::ifstream inputFilee(t, std::ios::in | std::ios::binary);
         inputFilee.read(reinterpret_cast<char*>(versteckteebeneeinsBias), sim * sizeof(double));
         inputFilee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "wz.bin";
         std::ifstream inputFileee(t, std::ios::in | std::ios::binary);
         inputFileee.read(reinterpret_cast<char*>(versteckteWeightszwei), sim * sim * sizeof(double));
         inputFileee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "bz.bin";
         std::ifstream inputFileeee(t, std::ios::in | std::ios::binary);
         inputFileeee.read(reinterpret_cast<char*>(versteckteebenezweiBias), sim * sizeof(double));
         inputFileeee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "wa.bin";
         std::ifstream inputFileeeee(t, std::ios::in | std::ios::binary);
         inputFileeeee.read(reinterpret_cast<char*>(ausgangsWeights), anzahlausgangsneuronen * anzahlversteckterneuronenzwei * sizeof(double));
-        inputFileeeee.close(); t = datein;
+        inputFileeeee.close(); 
+        t = "saves\\";
+        t += datein;
         t += "ba.bin";
         std::ifstream inputFileeeeee(t, std::ios::in | std::ios::binary);
         inputFileeeeee.read(reinterpret_cast<char*>(ausgangsebeneBias), anzahlausgangsneuronen * sizeof(double));
@@ -799,7 +812,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             return;
 
     }
-    int tr = anzahllernzyclen/10,trr=0;
+    int tr = (anzahllernzyclen*out)/100,trr=0;
    
     //training
     for (int zyclus = 0; zyclus < anzahllernzyclen; zyclus++) {
@@ -961,84 +974,43 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     cin >> temp;
     if (temp == 1) {
         
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "we.bin";
         std::ofstream outputFile(t, std::ios::out | std::ios::binary);
         outputFile.write(reinterpret_cast<char*>(versteckteWeightseins), sim* anzahleingangsneuronen * sizeof(double));
         outputFile.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "be.bin";
         std::ofstream outputFilee(t, std::ios::out | std::ios::binary);
         outputFilee.write(reinterpret_cast<char*>(versteckteebeneeinsBias), sim * sizeof(double));
         outputFilee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "wz.bin";
         std::ofstream outputFileee(t, std::ios::out | std::ios::binary);
         outputFileee.write(reinterpret_cast<char*>(versteckteWeightszwei), sim* sim * sizeof(double));
         outputFileee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "bz.bin";
         std::ofstream outputFileeee(t, std::ios::out | std::ios::binary);
         outputFileeee.write(reinterpret_cast<char*>(versteckteebenezweiBias), sim * sizeof(double));
         outputFileeee.close();
-        t = datein;
+        t = "saves\\";
+        t += datein;
         t += "wa.bin";
         std::ofstream outputFileeeee(t, std::ios::out | std::ios::binary);
         outputFileeeee.write(reinterpret_cast<char*>(ausgangsWeights), anzahlausgangsneuronen*  sim * sizeof(double));
-        outputFileeeee.close(); t = datein;
+        outputFileeeee.close(); 
+        t = "saves\\";
+        t += datein;
         t += "ba.bin";
         std::ofstream outputFileeeeee(t, std::ios::out | std::ios::binary);
         outputFileeeeee.write(reinterpret_cast<char*>(ausgangsebeneBias), anzahlausgangsneuronen * sizeof(double));
         outputFileeeeee.close();
     }
-
-    //char c = 'a';
-    while (true) {
-        int w = 0;
-        cout << "Inputs:" << endl;
-
-
-        cin >> c;
-        w = (c - 97);
-        cout << w << endl;
-        cout << "Input: ";
-        for (int n = 0; n < anzahleingangsneuronen; n++)
-        {
-            cout << training_inputs[w][n] << " ";
-        }
-
-        for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
-            double activation = versteckteebeneeinsBias[j];
-            for (int k = 0; k < anzahleingangsneuronen; k++) {
-                activation += training_inputs[w][k] * versteckteWeightseins[k][j];
-            }
-            versteckteebeneeins[j] = sigmoid(activation);
-        }
-        for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
-            double activation = versteckteebenezweiBias[j];
-            for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
-                activation += versteckteebeneeins[k] * versteckteWeightszwei[k][j];
-            }
-            versteckteebenezwei[j] = sigmoid(activation);
-        }
-
-        // berechnen der ausgangs ebene
-        for (int j = 0; j < anzahlausgangsneuronen; j++) {
-            double activation = ausgangsebeneBias[j];
-            for (int k = 0; k < anzahlversteckterneuronenzwei; k++) {
-                activation += versteckteebenezwei[k] * ausgangsWeights[k][j];
-            }
-            ausgangsebene[j] = sigmoid(activation);
-        }
-
-
-
-        cout << " Output: ";
-        for (int q = 0; q < anzahlausgangsneuronen; q++)
-        {
-            cout << ausgangsebene[q] << " ";
-        }
-    }
-    
+        
 }
 
