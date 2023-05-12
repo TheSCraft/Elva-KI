@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <time.h>
 
 using namespace std;
 vector<string> explode(const string& delimiter, const string& explodeme);
@@ -598,6 +599,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     double versteckteWeightseins[26][sim]{};
     double versteckteWeightszwei[sim][sim]{};
     double ausgangsWeights[sim][2]{};
+    double time1 = 0.0, tstart=0;
 
     double training_inputs[anzahltraningsdaten][26] = { {1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
                                                                             {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
@@ -813,10 +815,34 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
 
     }
     int tr = (anzahllernzyclen*out)/100,trr=0;
-   
+    
     //training
     for (int zyclus = 0; zyclus < anzahllernzyclen; zyclus++) {
-        
+        if (zyclus == 0) {
+            tstart = clock();
+        }
+        if (zyclus == 1) {
+            time1 += clock() - tstart;
+            
+            cout << "time = " << time1 << " milisec."<<endl;
+            time1*= anzahllernzyclen;
+            time1 /= 1000;
+            cout << "Geschaetzte zeit in sec = "<<time1<<endl;
+            time1 /= 60;
+            cout << "Geschaetzte zeit in min = " << time1 << endl;
+
+        }
+        if (zyclus == 100&&time1==0) {
+            time1 += clock() - tstart;
+
+            cout << "time*100 = " << time1 << " milisec." << endl;
+            time1 *= anzahllernzyclen/100;
+            time1 /= 1000;
+            cout << "Geschaetzte zeit in sec = " << time1 << endl;
+            time1 /= 60;
+            cout << "Geschaetzte zeit in min = " << time1 << endl;
+
+        }
         trr ++;
         if (trr == tr) {
             trr = 0;
@@ -979,7 +1005,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         t += "we.bin";
         std::ofstream outputFile(t, std::ios::out | std::ios::binary);
         outputFile.write(reinterpret_cast<char*>(versteckteWeightseins), sim* anzahleingangsneuronen * sizeof(double));
-        outputFile.close();
+        outputFile.close(); 
         t = "saves\\";
         t += datein;
         t += "be.bin";
