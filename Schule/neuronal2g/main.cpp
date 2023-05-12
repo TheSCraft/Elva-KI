@@ -21,7 +21,7 @@ double sigmoid(double x);
 double dSigmoid(double x);
 double zufallszahl();
 void mischen(int* array, size_t n);
-void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out);
+void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog);
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
 #endif
@@ -127,7 +127,7 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    // Main loop
+    // Main Guiloop
     bool done = false;
     bool acktivwin = false;
     static int outt = 10;
@@ -148,7 +148,7 @@ int main(int, char**)
         if (done)
             break;
 
-        // Start the Dear ImGui frame
+        // Starten des Dear ImGui frame
         ImGui_ImplDX12_NewFrame();
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
@@ -156,7 +156,7 @@ int main(int, char**)
         
         {
             static float f = 0.0f;
-            static bool zur = false;
+            static bool zur = false,prog=false;
             
 
 
@@ -196,13 +196,16 @@ int main(int, char**)
             if (zur) {
                 art = 2;
             }
+            ImGui::Checkbox("Zeige einzelne lern schritte", &prog);
+            if (ImGui::IsItemHovered())ImGui::SetTooltip("Verlangsamt extrem das programm");
+        
 
             static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
             if (ImGui::Button("Start")) {
                 if (!zur) {
                     
-                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt);
+                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt,prog);
                 }
                 if (zur) {
                     acktivwin = true;
@@ -219,7 +222,7 @@ int main(int, char**)
                 char inn = in[0];
                 if (ImGui::Button("Test"))
                     
-                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn,outt);
+                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn,outt,false);
                 ImGui::Text("Vokal: %f" ,outputone);
                 ImGui::Text("Konsonant: %f" ,outputtwo);
 
@@ -588,7 +591,7 @@ vector<string> explode(const string& delimiter, const string& str)
 }
 
 
-void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out) {
+void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog) {
 
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
@@ -883,7 +886,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 ausgangsebene[j] = sigmoid(activation);
             }
 
-            /*
+            if (prog == true) {
             cout << "Input: ";
             for (int w = 0; w < anzahleingangsneuronen; w++)
             {
@@ -900,7 +903,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 cout << training_outputs[i][w] << " ";
             }
             cout << " |" << (zyclus * 100) / anzahllernzyclen << "%" << endl;
-            */
+        }
 
             // Backprop
 
