@@ -560,7 +560,7 @@ double sigmoid(double x) { return 1 / (1 + exp(-x)); }
 double zufallszahl() { return (((double)rand()) / ((double)RAND_MAX)); }
 
 vector<string> explode(const string& delimiter, const string& str)
-{
+{//splittet einen string
     vector<string> arr;
 
     int strleng = str.length();
@@ -592,7 +592,7 @@ vector<string> explode(const string& delimiter, const string& str)
 
 
 void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog) {
-
+    //initaliesierung verschiedener varriabeln
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
     double ausgangsebene[2]{};
@@ -662,7 +662,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     
     
 
-    if (ein == 0) {
+    if (ein == 0) {//besetzen mit eingebe per hand (nur zum testen weil zu vielaufwand
         cout << "Versteckte Weights eins" << endl;
         for (int i = 0; i < anzahleingangsneuronen; i++) {
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
@@ -703,7 +703,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         }
     }
 
-    if (ein == 1) {
+    if (ein == 1) {//besetzen mit zufaulligen zahlen
         for (int i = 0; i < anzahleingangsneuronen; i++) {
             for (int j = 0; j < sim; j++) {
                 versteckteWeightseins[i][j] = zufallszahl();
@@ -728,7 +728,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         }
     }
     string t;
-    if (ein == 2) {
+    if (ein == 2) {//einlesen aus binären datein
         t = "saves\\";
         t += datein;
         t += "we.bin";
@@ -771,7 +771,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
    
     int temp=0;
    
-    if (trai) {
+    if (trai) {//nut ueben
             int w = 0;
 
             w = (c - 97);
@@ -817,10 +817,11 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             return;
 
     }
-    int tr = (anzahllernzyclen*out)/100,trr=0;
+    int tr = (anzahllernzyclen*out)/100,trr=0;//prozentualer vortschritsbalken
     
     //training
     for (int zyclus = 0; zyclus < anzahllernzyclen; zyclus++) {
+        //berechnen der Zeit die benötigt wird
         if (zyclus == 0) {
             tstart = clock();
         }
@@ -846,6 +847,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             cout << "Geschaetzte zeit in min = " << time1 << endl;
 
         }
+        // Vortschritsbalken
         trr ++;
         if (trr == tr) {
             trr = 0;
@@ -886,7 +888,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                 ausgangsebene[j] = sigmoid(activation);
             }
 
-            if (prog == true) {
+            if (prog == true) { // Ausgabe wenn aktiv
             cout << "Input: ";
             for (int w = 0; w < anzahleingangsneuronen; w++)
             {
@@ -958,7 +960,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             }
         }
     }
-
+    //Ausgabe der zu speichernden werte
     cout << "Finale Vesteckte Weights erste ebene\n[";
     for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
 
@@ -1001,7 +1003,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     cout << "]\n";
     cout << "Speichern? 1ja 2nein" << endl;
     cin >> temp;
-    if (temp == 1) {
+    if (temp == 1) {//schreiben in datein
         
         t = "saves\\";
         t += datein;
