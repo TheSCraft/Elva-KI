@@ -166,69 +166,6 @@ int main() {
     }
 
     if (temp == 3) {
-        /*cout << "dateiname:";
-        cin >> datein;
-        datein += ".txt";
-        string in;
-        int tempp = 0;
-        ifstream MyReadFilee(datein);
-        getline(MyReadFilee, in);
-        MyReadFilee.close();
-        vector<string> inn = explode("|", in);
-        cout << "Versteckte Weights eins" << endl;
-        for (int i = 0; i < anzahlversteckterneuroneneins; i++) {
-            for (int j = 0; j < anzahleingangsneuronen; j++) {
-                versteckteWeightseins[j][i] = stod(inn[tempp]);
-                tempp++;
-                cout  << versteckteWeightseins[j][i] << endl;
-            }
-        }
-        cout << "versteckte Bias eins" << endl;
-
-        for (int i = 0; i < anzahlversteckterneuroneneins; i++) {
-            versteckteebeneeinsBias[i] = stod(inn[tempp]);
-            tempp++;
-            cout << versteckteebeneeinsBias[i] << endl;
-
-
-        }
-        cout << "Versteckte Weights zwei" << endl;
-        for (int i = 0; i < anzahlversteckterneuronenzwei; i++) {
-            for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
-                versteckteWeightszwei[j][i] = stod(inn[tempp]);
-                tempp++;
-                cout << versteckteWeightszwei[j][i] << endl;
-            }
-        }
-        cout << "versteckte Bias zwei" << endl;
-
-        for (int i = 0; i < anzahlversteckterneuronenzwei; i++) {
-            versteckteebenezweiBias[i] = stod(inn[tempp]);
-            tempp++;
-            cout << versteckteebenezweiBias[i] << endl;
-
-
-        }
-
-        cout << "ausgangs Weights " << endl;
-        for (int i = 0; i < anzahlversteckterneuronenzwei; i++) {
-            for (int j = 0; j < anzahlausgangsneuronen; j++) {
-
-
-                ausgangsWeights[j][i] = stod(inn[tempp]);
-                tempp++;
-                cout << ausgangsWeights[j][i] << endl;
-
-            }
-        }
-        cout << "ausgangs Bias" << endl;
-
-        for (int i = 0; i < anzahlausgangsneuronen; i++) {
-            ausgangsebeneBias[i] = stod(inn[tempp]);
-            tempp++;
-            cout << ausgangsebeneBias[i] << endl;
-
-        }*/
         cout << "dateiname:";
         cin >> datein;
         t = datein;
@@ -391,12 +328,6 @@ int main() {
                 double errorOutput = (training_outputs[i][j] - ausgangsebene[j]);
                 deltaOutput[j] = errorOutput * dSigmoid(ausgangsebene[j]);
             }
-            double deltaOutputz[anzahlversteckterneuronenzwei]{};
-            for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
-                double errorOutputz = (training_outputs[i][anzahlausgangsneuronen - 1] - versteckteebenezwei[j]);
-                deltaOutputz[j] = errorOutputz * dSigmoid(versteckteebenezwei[j]);
-            }
-
             double deltaHiddenzwei[anzahlversteckterneuronenzwei]{};
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 double errorHidden = 0.0;
@@ -410,7 +341,8 @@ int main() {
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 double errorHidden = 0.0;
                 for (int k = 0; k < anzahlversteckterneuronenzwei; k++) {
-                    errorHidden += deltaOutputz[k] * versteckteWeightszwei[j][k];
+                    errorHidden += deltaHiddenzwei[k] * versteckteWeightszwei[j][k];
+
                 }
                 deltaHiddeneins[j] = errorHidden * dSigmoid(versteckteebeneeins[j]);
             }
@@ -425,11 +357,13 @@ int main() {
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 versteckteebenezweiBias[j] += deltaHiddenzwei[j] * lerngenauichkeit;
                 for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
-                    versteckteWeightszwei[k][j] += deltaHiddeneins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+                    versteckteWeightszwei[k][j] += versteckteebeneeins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+
                 }
             }
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 versteckteebeneeinsBias[j] += deltaHiddeneins[j] * lerngenauichkeit;
+
                 for (int k = 0; k < anzahleingangsneuronen; k++) {
                     versteckteWeightseins[k][j] += training_inputs[i][k] * deltaHiddeneins[j] * lerngenauichkeit;
                 }

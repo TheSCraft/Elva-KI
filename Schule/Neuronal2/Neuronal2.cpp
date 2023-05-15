@@ -18,8 +18,8 @@ void mischen(int* array, size_t n);
 
 
 constexpr auto anzahleingangsneuronen = 2;
-constexpr auto anzahlversteckterneuroneneins = 32;
-constexpr auto anzahlversteckterneuronenzwei = 32;
+constexpr auto anzahlversteckterneuroneneins = 4;
+constexpr auto anzahlversteckterneuronenzwei = 4;
 constexpr auto anzahlausgangsneuronen = 1;
 constexpr auto anzahltraningsdaten = 4;
 
@@ -303,12 +303,6 @@ int main() {
                 double errorOutput = (training_outputs[i][j] - ausgangsebene[j]);
                 deltaOutput[j] = errorOutput * dSigmoid(ausgangsebene[j]);
             }
-            double deltaOutputz[anzahlversteckterneuronenzwei]{};
-            for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
-                double errorOutputz = (training_outputs[i][anzahlausgangsneuronen-1] -versteckteebenezwei[j]);
-                deltaOutputz[j] = errorOutputz * dSigmoid(versteckteebenezwei[j]);
-            }
-
             double deltaHiddenzwei[anzahlversteckterneuronenzwei]{};
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 double errorHidden = 0.0;
@@ -322,11 +316,11 @@ int main() {
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 double errorHidden = 0.0;
                 for (int k = 0; k < anzahlversteckterneuronenzwei; k++) {
-                    errorHidden += deltaOutputz[k] * versteckteWeightszwei[j][k];
-                }//delta Outputz[k] ist coursed
+                    errorHidden += deltaHiddenzwei[k] * versteckteWeightszwei[j][k];
+                }
                 deltaHiddeneins[j] = errorHidden * dSigmoid(versteckteebeneeins[j]);
             }
-            
+
             // aendern der werte
             for (int j = 0; j < anzahlausgangsneuronen; j++) {
                 ausgangsebeneBias[j] += deltaOutput[j] * lerngenauichkeit;
@@ -337,11 +331,13 @@ int main() {
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 versteckteebenezweiBias[j] += deltaHiddenzwei[j] * lerngenauichkeit;
                 for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
-                    versteckteWeightszwei[k][j] += deltaHiddeneins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+                    versteckteWeightszwei[k][j] += versteckteebeneeins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+
                 }
             }
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 versteckteebeneeinsBias[j] += deltaHiddeneins[j] * lerngenauichkeit;
+
                 for (int k = 0; k < anzahleingangsneuronen; k++) {
                     versteckteWeightseins[k][j] += training_inputs[i][k] * deltaHiddeneins[j] * lerngenauichkeit;
                 }

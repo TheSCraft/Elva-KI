@@ -64,7 +64,7 @@ void CleanupRenderTarget();
 void WaitForLastSubmittedFrame();
 FrameContext* WaitForNextFrameResources();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
+//Globale Varriabeln
 constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlausgangsneuronen = 2;
 constexpr auto anzahltraningsdaten = 26;
@@ -143,6 +143,7 @@ int main(int, char**)
             if (msg.message == WM_QUIT)
                 done = true;
         }
+        //varriablen zum übergeben
         static int zyklen = 0, groe = 1, einsneur = 1, zweineuro = 1;
         
         if (done)
@@ -558,7 +559,7 @@ void mischen(int* array, size_t n) {// tranings zufällig machen
 }
 double dSigmoid(double x) { return x * (1 - x); }// dsigmoid um es rückgängig zu machen
 double sigmoid(double x) { return 1 / (1 + exp(-x)); }//sigmoid funktion um alle zahlen zwischen 0 und 1 zu bringen
-double zufallszahl() { return (((double)rand()) / ((double)RAND_MAX)); }
+double zufallszahl() { return (((double)rand()) / ((double)RAND_MAX)); }//Um zufall zu erzeugen für die ersten werte
 
 vector<string> explode(const string& delimiter, const string& str)
 {//splittet einen string
@@ -842,11 +843,24 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
 
         }
         //nochmal weil zu schnell
-        if (zyclus == 100&&time1==0) {
+        if (zyclus == 100) {
+            time1 = 0;
             time1 += clock() - tstart;
 
             cout << "time*100 = " << time1 << " milisec." << endl;
             time1 *= anzahllernzyclen/100;
+            time1 /= 1000;
+            cout << "Geschaetzte zeit in sec = " << time1 << endl;
+            time1 /= 60;
+            cout << "Geschaetzte zeit in min = " << time1 << endl;
+
+        }
+        if (zyclus == 10000) {
+            time1 = 0;
+            time1 += clock() - tstart;
+
+            cout << "time*10000 = " << time1 << " milisec." << endl;
+            time1 *= anzahllernzyclen / 10000;
             time1 /= 1000;
             cout << "Geschaetzte zeit in sec = " << time1 << endl;
             time1 /= 60;
@@ -917,16 +931,10 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
 
             // berechnen der änderungen
             double deltaOutput[2]{};
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < anzahlausgangsneuronen; j++) {
                 double errorOutput = (training_outputs[i][j] - ausgangsebene[j]);
                 deltaOutput[j] = errorOutput * dSigmoid(ausgangsebene[j]);
             }
-            double deltaOutputz[sim]{};
-            for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
-                double errorOutputz = (training_outputs[i][anzahlausgangsneuronen - 1] - versteckteebenezwei[j]);
-                deltaOutputz[j] = errorOutputz * dSigmoid(versteckteebenezwei[j]);
-            }
-
             double deltaHiddenzwei[sim]{};
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 double errorHidden = 0.0;
@@ -940,7 +948,8 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 double errorHidden = 0.0;
                 for (int k = 0; k < anzahlversteckterneuronenzwei; k++) {
-                    errorHidden += deltaOutputz[k] * versteckteWeightszwei[j][k];
+                    errorHidden += deltaHiddenzwei[k] * versteckteWeightszwei[j][k];
+                    
                 }
                 deltaHiddeneins[j] = errorHidden * dSigmoid(versteckteebeneeins[j]);
             }
@@ -955,11 +964,13 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             for (int j = 0; j < anzahlversteckterneuronenzwei; j++) {
                 versteckteebenezweiBias[j] += deltaHiddenzwei[j] * lerngenauichkeit;
                 for (int k = 0; k < anzahlversteckterneuroneneins; k++) {
-                    versteckteWeightszwei[k][j] += deltaHiddeneins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+                    versteckteWeightszwei[k][j] += versteckteebeneeins[j] * deltaHiddenzwei[j] * lerngenauichkeit;
+                    
                 }
             }
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 versteckteebeneeinsBias[j] += deltaHiddeneins[j] * lerngenauichkeit;
+                
                 for (int k = 0; k < anzahleingangsneuronen; k++) {
                     versteckteWeightseins[k][j] += training_inputs[i][k] * deltaHiddeneins[j] * lerngenauichkeit;
                 }
