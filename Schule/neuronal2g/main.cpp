@@ -155,15 +155,16 @@ int main(int, char**)
 
         
         {
+            //nützliche varriablen
             static float f = 0.0f;
             static bool zur = false,prog=false;
             
 
-
+            //initialiesierung haupt fenster
             ImGui::Begin("Neuronales Netzwerk");                          
 
             ImGui::Text("Bitte einstellungen einstellen");               
-            
+            //eingaben für das neuronale netzwerk
            ImGui::Checkbox("Einstellungen", &show_another_window);
           
            if (!zur)if (ImGui::Button("Tastatur Eingabe"))ImGui::SetKeyboardFocusHere();
@@ -542,7 +543,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     return ::DefWindowProcW(hWnd, msg, wParam, lParam);
 }
 
-void mischen(int* array, size_t n) {
+void mischen(int* array, size_t n) {// tranings zufällig machen
     if (n > 1)
     {
         size_t i;
@@ -555,8 +556,8 @@ void mischen(int* array, size_t n) {
         }
     }
 }
-double dSigmoid(double x) { return x * (1 - x); }
-double sigmoid(double x) { return 1 / (1 + exp(-x)); }
+double dSigmoid(double x) { return x * (1 - x); }// dsigmoid um es rückgängig zu machen
+double sigmoid(double x) { return 1 / (1 + exp(-x)); }//sigmoid funktion um alle zahlen zwischen 0 und 1 zu bringen
 double zufallszahl() { return (((double)rand()) / ((double)RAND_MAX)); }
 
 vector<string> explode(const string& delimiter, const string& str)
@@ -590,7 +591,7 @@ vector<string> explode(const string& delimiter, const string& str)
     return arr;
 }
 
-
+//neuronales netzwerk fast gleich zu neuronal 2.1
 void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog) {
     //initaliesierung verschiedener varriabeln
     double versteckteebeneeins[sim]{};
@@ -603,7 +604,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     double versteckteWeightszwei[sim][sim]{};
     double ausgangsWeights[sim][2]{};
     double time1 = 0.0, tstart=0;
-
+    //mögliche inputs
     double training_inputs[anzahltraningsdaten][26] = { {1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
                                                                             {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
                                                                             {0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
@@ -631,6 +632,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0},
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0},
     };
+    //erwartete ergebnisse
     double training_outputs[anzahltraningsdaten][2] = { {1.0,0.0 },
                                                                              {0.0,1.0 },
                                                                              {0.0,1.0 },
@@ -766,14 +768,17 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
         inputFileeeeee.read(reinterpret_cast<char*>(ausgangsebeneBias), anzahlausgangsneuronen * sizeof(double));
         inputFileeeeee.close();
     }
-
-       int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
-   
+    //zum mischen der tranings notwendig
+       int reinfolgetrainingsdaten[anzahltraningsdaten] = {};
+       for (int i = 0; i < anzahltraningsdaten; i++)
+       {
+           reinfolgetrainingsdaten[i] = i;
+       }
     int temp=0;
    
-    if (trai) {//nut ueben
+    if (trai) {//nur testen
             int w = 0;
-
+            //asci umwandlung
             w = (c - 97);
             cout << w << endl;
             cout << "Input: ";
@@ -836,6 +841,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             cout << "Geschaetzte zeit in min = " << time1 << endl;
 
         }
+        //nochmal weil zu schnell
         if (zyclus == 100&&time1==0) {
             time1 += clock() - tstart;
 
