@@ -22,7 +22,7 @@ constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlversteckterneuroneneins = 16;
 constexpr auto anzahlversteckterneuronenzwei = 16;
 constexpr auto anzahlausgangsneuronen = 2;
-constexpr auto anzahltraningsdaten = 26;
+constexpr auto anzahltraningsdaten = 27;
 
 
 int main() {
@@ -65,6 +65,7 @@ int main() {
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0},
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0},
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0},
+                                                                            {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
                                                                           };
     double training_outputs[anzahltraningsdaten][anzahlausgangsneuronen] = { {1.0,0.0 },
                                                                              {0.0,1.0 },
@@ -92,6 +93,7 @@ int main() {
                                                                              {0.0,1.0 },
                                                                              {0.0,1.0 },
                                                                              {0.0,1.0 },
+                                                                             {0.0,0.0 },
                                                                            };
     int temp = 0;
     string datein,t;
@@ -199,7 +201,11 @@ int main() {
         inputFileeeeee.close();
     }
 
-     int reinfolgetrainingsdaten[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25 };
+    int reinfolgetrainingsdaten[anzahltraningsdaten] = {};
+    for (int i = 0; i < anzahltraningsdaten; i++)
+    {
+        reinfolgetrainingsdaten[i] = i;
+    }
     cout << "Training?  1ja  2nein";
     cin >> temp;
     if (temp == 2) {

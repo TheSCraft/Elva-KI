@@ -67,7 +67,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 //Globale Varriabeln
 constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlausgangsneuronen = 2;
-constexpr auto anzahltraningsdaten = 26;
+constexpr auto anzahltraningsdaten = 27;
 constexpr auto sim = 100;
 double outputone = 0;
 double outputtwo = 0;
@@ -632,6 +632,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0},
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0},
                                                                             {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0},
+                                                                            {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0},
     };
     //erwartete ergebnisse
     double training_outputs[anzahltraningsdaten][2] = { {1.0,0.0 },
@@ -660,6 +661,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
                                                                              {0.0,1.0 },
                                                                              {0.0,1.0 },
                                                                              {0.0,1.0 },
+                                                                             {0.0,0.0 },
     };
     
     
@@ -781,6 +783,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             int w = 0;
             //asci umwandlung
             w = (c - 97);
+            if (w <= 0 || w >= 26)w = 26;
             cout << w << endl;
             cout << "Input: ";
             for (int n = 0; n < anzahleingangsneuronen; n++)
