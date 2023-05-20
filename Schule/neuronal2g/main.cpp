@@ -21,7 +21,7 @@ double sigmoid(double x);
 double dSigmoid(double x);
 double zufallszahl();
 void mischen(int* array, size_t n);
-void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog);
+void neuro(double lerngenauichkeit,int ein,bool trai ,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog,bool speichern);
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
 #endif
@@ -158,7 +158,7 @@ int main(int, char**)
         {
             //nützliche varriablen
             static float f = 0.0f;
-            static bool zur = false,prog=false;
+            static bool zur = false,prog=false,speichern=false;
             
 
             //initialiesierung haupt fenster
@@ -204,10 +204,12 @@ int main(int, char**)
 
             static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
+            if (simon == "") { speichern=false; }
+            else { speichern=true; }
             if (ImGui::Button("Start")) {
                 if (!zur) {
                     
-                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt,prog);
+                    neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt,prog,speichern);
                 }
                 if (zur) {
                     acktivwin = true;
@@ -224,7 +226,7 @@ int main(int, char**)
                 char inn = in[0];
                 if (ImGui::Button("Test"))
                     
-                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn,outt,false);
+                    neuro(f, art, true, zyklen, einsneur, zweineuro, simon,inn,outt,false,false);
                 ImGui::Text("Vokal: %f" ,outputone);
                 ImGui::Text("Konsonant: %f" ,outputtwo);
 
@@ -593,7 +595,7 @@ vector<string> explode(const string& delimiter, const string& str)
 }
 
 //neuronales netzwerk fast gleich zu neuronal 2.1
-void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog) {
+void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int anzahlversteckterneuroneneins, int anzahlversteckterneuronenzwei, string datein,char c,int out,bool prog,bool speichern) {
     //initaliesierung verschiedener varriabeln
     double versteckteebeneeins[sim]{};
     double versteckteebenezwei[sim]{};
@@ -777,7 +779,6 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
        {
            reinfolgetrainingsdaten[i] = i;
        }
-    int temp=0;
    
     if (trai) {//nur testen
             int w = 0;
@@ -1021,9 +1022,8 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
     }
 
     cout << "]\n";
-    cout << "Speichern? 1ja 2nein" << endl;
-    cin >> temp;
-    if (temp == 1) {//schreiben in datein
+    
+    if (speichern) {//schreiben in datein
         
         t = "saves\\";
         t += datein;
