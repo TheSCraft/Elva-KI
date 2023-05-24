@@ -1,6 +1,0 @@
-﻿  Tiktoctoe.cpp
-C:\c++projekt\Schule\Schule\Tiktoctoe\Tiktoctoe.cpp(72,11): warning C4129: "h": nicht erkannte Folge von Escapesequenz
-C:\c++projekt\Schule\Schule\Tiktoctoe\Tiktoctoe.cpp(72,11): warning C4129: "c": nicht erkannte Folge von Escapesequenz
-C:\c++projekt\Schule\Schule\Tiktoctoe\Tiktoctoe.cpp(237,12): warning C4129: "g": nicht erkannte Folge von Escapesequenz
-C:\c++projekt\Schule\Schule\Tiktoctoe\Tiktoctoe.cpp(186): warning C4715: "minimax": Nicht alle Codepfade geben einen Wert zurück.
-  Tiktoctoe.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\Tiktoctoe.exe

@@ -1,4 +1,0 @@
-﻿  test.cpp
-C:\c++projekt\Schule\Schule\test\test.cpp(34,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\c++projekt\Schule\Schule\test\test.cpp(35,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-  test.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\test.exe

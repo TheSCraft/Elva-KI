@@ -44,7 +44,7 @@ int main() {
     double training_outputs[anzahltraningsdaten][anzahlausgangsneuronen] = {0};
     int temp = 0;
     string datein, t;
-
+    string c;
     string in;
     char inputsc[100];
     int tum = 0;
@@ -187,26 +187,29 @@ int main() {
     cout << "Training?  1ja  2nein";
     cin >> temp;
     if (temp == 2) {
-        char c = 'a';
 
         while (true) {
-            int w = 0;
             cout << "Inputs:" << endl;
+            char input[10]{ 0 };
+            double inpuzt[10]{ 0 };
 
-
-            cin >> c;
-            w = (c - 97);
-            cout << w << endl;
-            cout << "Input: ";
-            for (int n = 0; n < anzahleingangsneuronen; n++)
+            getline(std::cin, c);
+            std::strcpy(input, c.c_str());
+            for (int t = 0; t < anzahleingangsneuronen; t++)
             {
-                cout << training_inputs[w][n] << " ";
+
+                if (input[t] != 0)
+                    inpuzt[t] = ((double)input[t] - 97) / 100 * 3 + 0.03;
+                cout << inpuzt[t] << " ";
+
             }
+
+
 
             for (int j = 0; j < anzahlversteckterneuroneneins; j++) {
                 double activation = versteckteebeneeinsBias[j];
                 for (int k = 0; k < anzahleingangsneuronen; k++) {
-                    activation += training_inputs[w][k] * versteckteWeightseins[k][j];
+                    activation += inpuzt[k] * versteckteWeightseins[k][j];
                 }
                 versteckteebeneeins[j] = sigmoid(activation);
             }
@@ -234,11 +237,6 @@ int main() {
             {
                 cout << ausgangsebene[q] << " ";
             }
-
-
-
-
-
         }
 
 
@@ -450,7 +448,6 @@ int main() {
         outputFileeeeee.close();
     }
 
-    string c;
     while (true) {
         cout << "Inputs:" << endl;
         char input[10]{ 0 };
