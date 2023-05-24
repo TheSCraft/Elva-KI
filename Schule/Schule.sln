@@ -35,7 +35,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "grafik", "grafik\grafik.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "..\..\imgui-docking\examples\example_win32_directx12\example_win32_directx12.vcxproj", "{B4CF9797-519D-4AFE-A8F4-5141A6B521D3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "neuronal2g\neuronal2g.vcxproj", "{690F2A4A-DB83-4548-B34E-45C1702B9209}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neuronal2g", "neuronal2g\neuronal2g.vcxproj", "{690F2A4A-DB83-4548-B34E-45C1702B9209}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Neuronal2.2", "Neuronal2.2\Neuronal2.2.vcxproj", "{E2DE874B-239C-4797-A26E-D0E48C400174}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -321,6 +323,22 @@ Global
 		{690F2A4A-DB83-4548-B34E-45C1702B9209}.Release|x64.Build.0 = Release|x64
 		{690F2A4A-DB83-4548-B34E-45C1702B9209}.Release|x86.ActiveCfg = Release|Win32
 		{690F2A4A-DB83-4548-B34E-45C1702B9209}.Release|x86.Build.0 = Release|Win32
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|ARM.ActiveCfg = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|ARM.Build.0 = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|ARM64.ActiveCfg = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|ARM64.Build.0 = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|x64.ActiveCfg = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|x64.Build.0 = Debug|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|x86.ActiveCfg = Debug|Win32
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Debug|x86.Build.0 = Debug|Win32
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|ARM.ActiveCfg = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|ARM.Build.0 = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|ARM64.ActiveCfg = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|ARM64.Build.0 = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|x64.ActiveCfg = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|x64.Build.0 = Release|x64
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|x86.ActiveCfg = Release|Win32
+		{E2DE874B-239C-4797-A26E-D0E48C400174}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
