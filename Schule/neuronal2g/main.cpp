@@ -1,3 +1,4 @@
+//Neuronales netzwerk von Simon Seitz
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx12.h"
@@ -41,7 +42,6 @@ struct FrameContext
 static int const                    NUM_FRAMES_IN_FLIGHT = 3;
 static FrameContext                 g_frameContext[NUM_FRAMES_IN_FLIGHT] = {};
 static UINT                         g_frameIndex = 0;
-
 static int const                    NUM_BACK_BUFFERS = 3;
 static ID3D12Device* g_pd3dDevice = NULL;
 static ID3D12DescriptorHeap* g_pd3dRtvDescHeap = NULL;
@@ -64,17 +64,18 @@ void CleanupRenderTarget();
 void WaitForLastSubmittedFrame();
 FrameContext* WaitForNextFrameResources();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 //Globale Varriabeln
 constexpr auto anzahleingangsneuronen = 26;
 constexpr auto anzahlausgangsneuronen = 2;
-constexpr auto anzahltraningsdaten = 27;
-constexpr auto sim = 100;
-double outputone = 0;
+constexpr auto anzahltraningsdaten = 27; //anzahl der trainingssätze mit denen die Ki trainiert wird
+constexpr auto sim = 100;//maximale neuronen
+double outputone = 0;//outputs für leichtere übertragung
 double outputtwo = 0;
 // Main code
 int main(int, char**)
 {
-    
+    //Winapi und ImGUI
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, L"ImGui Example", NULL };
     ::RegisterClassExW(&wc);
     HWND hwnd = ::CreateWindowW(wc.lpszClassName, L"Neuronales Netzwerk", WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
@@ -121,20 +122,24 @@ int main(int, char**)
         g_pd3dSrvDescHeap->GetCPUDescriptorHandleForHeapStart(),
         g_pd3dSrvDescHeap->GetGPUDescriptorHandleForHeapStart());
 
-
-    
-    
     bool show_another_window = false;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);//Hintergrund Fabe
+
+    //nützliche varriablen
+    bool done = false;//endedes programms
+    bool acktivwin = false;//fürextra fenster
+    static int outt = 10;
+    static float f = 0.0f;//lerngenauigkeit
+    static int zyklen = 0, groe = 1, einsneur = 1, zweineuro = 1; //varriablen zum übergeben
+    static bool zur = false, prog = false, speichern = false;//modi in dennen das NN genutztwerden soll
+    static int art = -1;//-1nix 0mannuell 1zufaullig 2laden
+    const char* names[] = { "Manuell", "Zufaellig", "Laden" };
+    static bool toggles[] = { true, false, false };
 
     // Main Guiloop
-    bool done = false;
-    bool acktivwin = false;
-    static int outt = 10;
-
     while (!done)
     {
-       
+        //wenn fenster geschlossen wird
         MSG msg;
         while (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
         {
@@ -143,9 +148,6 @@ int main(int, char**)
             if (msg.message == WM_QUIT)
                 done = true;
         }
-        //varriablen zum übergeben
-        static int zyklen = 0, groe = 1, einsneur = 1, zweineuro = 1;
-        
         if (done)
             break;
 
@@ -154,43 +156,29 @@ int main(int, char**)
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        
         {
-            //nützliche varriablen
-            static float f = 0.0f;
-            static bool zur = false,prog=false,speichern=false;
-            
-
             //initialiesierung haupt fenster
             ImGui::Begin("Neuronales Netzwerk");                          
-
             ImGui::Text("Bitte einstellungen einstellen");               
             //eingaben für das neuronale netzwerk
            ImGui::Checkbox("Einstellungen", &show_another_window);
-          
+          //verschiedene einstellungen für das NN
            if (!zur)if (ImGui::Button("Tastatur Eingabe"))ImGui::SetKeyboardFocusHere();
            if (!zur)ImGui::SliderFloat("Lerngenauigkeit", &f, 0.0f, 1.0f);
-            if (!zur)ImGui::SameLine();
-            if(!zur)ImGui::Text("Lerngenauigkeit = %f", f);
-
-            static int art = -1;
-            const char* names[] = { "Manuell", "Zufaellig", "Laden" };
-            static bool toggles[] = { true, false, false};
-
-            
-            if (ImGui::Button("Anfangswerte"))
-                ImGui::OpenPopup("my_select_popup");
-            ImGui::SameLine();
-            ImGui::TextUnformatted(art == -1 ? "<Nichts>" : names[art]);
-            if (ImGui::BeginPopup("my_select_popup"))
-            {
-                ImGui::SeparatorText("Anfangswerte"); 
-                for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-                    if (ImGui::Selectable(names[i]))
-                        art = i;
-                ImGui::EndPopup();
-            }
-
+           if (!zur)ImGui::SameLine();
+           if(!zur)ImGui::Text("Lerngenauigkeit = %f", f);
+           if (ImGui::Button("Anfangswerte"))
+               ImGui::OpenPopup("my_select_popup");
+           ImGui::SameLine();
+           ImGui::TextUnformatted(art == -1 ? "<Nichts>" : names[art]);
+           if (ImGui::BeginPopup("my_select_popup"))
+           {
+               ImGui::SeparatorText("Anfangswerte");
+               for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+                   if (ImGui::Selectable(names[i]))
+                       art = i;
+               ImGui::EndPopup();
+           }
             if(!zur)ImGui::DragInt("Trainigszyklen", &zyklen, groe, 0, 9999999);
             ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, sim);
             ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
@@ -199,16 +187,13 @@ int main(int, char**)
                 art = 2;
             }
             ImGui::Checkbox("Zeige einzelne lern schritte", &prog);
-            if (ImGui::IsItemHovered())ImGui::SetTooltip("Verlangsamt extrem das programm");
-        
-
+            if (ImGui::IsItemHovered())ImGui::SetTooltip("Verlangsamt extrem das programm");//cout ist extrem langsam im vergleich
             static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
             if (simon == "") { speichern=false; }
             else { speichern=true; }
             if (ImGui::Button("Start")) {
                 if (!zur) {
-                    
                     neuro(f, art, zur, zyklen, einsneur, zweineuro, simon,NULL,outt,prog,speichern);
                 }
                 if (zur) {
@@ -217,9 +202,11 @@ int main(int, char**)
             }
             ImGui::SameLine();
             ImGui::End();
+            //ende vom hauptfenster
 
             if (acktivwin)
             {
+                //beginn trainingsfenster
                 ImGui::Begin("Training/,Test", &acktivwin);
                 ImGui::Text("Training");
                 static char in[64] = ""; ImGui::InputText("Input", in, 64);
@@ -236,8 +223,10 @@ int main(int, char**)
             }
         }
 
+        //wenn einstellungen aufgerufen werden
         if (show_another_window)
         {
+            //beginn einstellungs fenster
             ImGui::Begin("Einstellungen", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
             ImGui::Text("Einstellungen");
             ImGui::ColorEdit3("clear color", (float*)&clear_color);

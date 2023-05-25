@@ -20,6 +20,57 @@
 <p><a href="https://www.buymeacoffee.com/thescraft"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="thescraft" /></a></p><br><br>
 
 
-# My shool projects
+# Neuronal Network
 ![GitHub repo size](https://img.shields.io/github/repo-size/thescraft/schule?style=for-the-badge)  
 ![GitHub last commit](https://img.shields.io/github/last-commit/thescraft/schule?style=for-the-badge)
+<br>
+<h3>Neuronal1</h3>
+
+- Neuronalesnetzwerk mit einer Versteckter Ebbene
+
+- Trainiert ein xor
+
+- Speichert in txt
+
+<h3>Neuronal2</h3>
+
+- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+
+- Trainiert ein xor
+
+- Speichert in txt
+
+<h3>Neuronal2.1</h3>
+
+- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+
+- Trainiert Vokale und Konsunanten
+
+- Speichert in bin
+
+<h3>Neuronal2g</h3>
+
+- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+
+- Trainiert Vokale und konsunanten (gleich mit 2.1)
+
+- Speichert in bin
+
+- Grafische benutzerfläche
+
+- hohe Effizienz durch fehlendes ``` "cout" ```
+
+<h3>Neuronal2.2</h3>
+
+- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+
+- Trainiert Begruesungen und verabschiedungen
+
+- Speichert in bin
+
+<br>
+
+# Forward Pass
+![Forward-Pass](https://github.com/TheSCraft/Schule/blob/Neuronal-Networks/Schule/Neuronales%20Network%20Forward%20pass%20-%20OneNote%2023.05.2023%2010_45_12.png)
+
+
