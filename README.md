@@ -71,6 +71,6 @@
 <br>
 
 # Forward Pass
-![Forward-Pass](https://github.com/TheSCraft/Schule/blob/Neuronal-Networks/Schule/Neuronales%20Network%20Forward%20pass%20-%20OneNote%2023.05.2023%2010_45_12.png)
+![Forward-Pass](https://github.com/TheSCraft/Schule/blob/Main/Schule/Neuronales%20Network%20Forward%20pass%20-%20OneNote%2023.05.2023%2010_45_12.png)
 
 
