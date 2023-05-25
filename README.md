@@ -20,6 +20,6 @@
 <p><a href="https://www.buymeacoffee.com/thescraft"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="thescraft" /></a></p><br><br>
 
 
-# Neuronal Network
+# My shool projects
 ![GitHub repo size](https://img.shields.io/github/repo-size/thescraft/schule?style=for-the-badge)  
 ![GitHub last commit](https://img.shields.io/github/last-commit/thescraft/schule?style=for-the-badge)
