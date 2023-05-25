@@ -26,7 +26,7 @@
 <br>
 <h3>Neuronal1</h3>
 
-- Neuronalesnetzwerk mit einer Versteckter Ebbene
+- Neuronales Netzwerk mit einer versteckter Ebene
 
 - Trainiert ein xor
 
@@ -34,7 +34,7 @@
 
 <h3>Neuronal2</h3>
 
-- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+- Neuronales Netzwerk mit zwei versteckten Ebenen
 
 - Trainiert ein xor
 
@@ -42,29 +42,29 @@
 
 <h3>Neuronal2.1</h3>
 
-- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+- Neuronales Netzwerk mit zwei versteckten Ebenen
 
-- Trainiert Vokale und Konsunanten
+- Trainiert Vokale und Konsonanten
 
 - Speichert in bin
 
 <h3>Neuronal2g</h3>
 
-- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+- Neuronales Netzwerk mit zwei versteckten Ebenen
 
-- Trainiert Vokale und konsunanten (gleich mit 2.1)
+- Trainiert Vokale und Konsonanten (gleich mit 2.1)
 
 - Speichert in bin
 
-- Grafische benutzerfläche
+- Grafische Benutzerfläche
 
 - hohe Effizienz durch fehlendes ``` "cout" ```
 
 <h3>Neuronal2.2</h3>
 
-- Neuronalesnetzwerk mit zwei Versteckten Ebbenen
+- Neuronales Netzwerk mit zwei versteckten Ebenen
 
-- Trainiert Begruesungen und verabschiedungen
+- Trainiert Begruessungen und Verabschiedungen
 
 - Speichert in bin
 
