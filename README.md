@@ -7,6 +7,8 @@
 
 - 📫 How to reach me **thescraft0307@gmail.com**
 
+- 👨‍💻 All of my projects are available at [Schoolproject](https://github.com/TheSCraft/schoolproject)
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://instagram.com/thescraft0341" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="thescraft0341" height="30" width="40" /></a>
