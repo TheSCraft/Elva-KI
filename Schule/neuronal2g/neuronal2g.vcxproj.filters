@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="..\..\..\imgui-docking\imgui_demo.cpp">
-      <Filter>imgu</Filter>
-    </ClCompile>
     <ClCompile Include="imgui_impl_dx12.cpp">
       <Filter>sources</Filter>
     </ClCompile>
@@ -23,12 +20,12 @@
     <ClCompile Include="imgui_draw.cpp">
       <Filter>imgu</Filter>
     </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>imgu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
-    <None Include="..\..\..\imgui-docking\misc\debuggers\imgui.natstepfilter">
-      <Filter>imgu</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgu">
@@ -63,10 +60,5 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>imgu</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="..\..\..\imgui-docking\misc\debuggers\imgui.natvis">
-      <Filter>imgu</Filter>
-    </Natvis>
   </ItemGroup>
 </Project>

@@ -1,1 +1,2 @@
 C:\c++projekt\Schule\Schule\neuronal2g\Debug\neuronal2g.exe
+C:\c++projekt\Gitschule\Schule\Schule\neuronal2g\Debug\neuronal2g.exe

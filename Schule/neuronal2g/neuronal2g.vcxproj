@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\imgui-docking\imgui_demo.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="imgui_impl_dx12.cpp" />
     <ClCompile Include="imgui_impl_win32.cpp" />
@@ -158,11 +158,7 @@
     <ClCompile Include="imgui_draw.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\imgui-docking\misc\debuggers\imgui.natstepfilter" />
     <None Include="..\README.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="..\..\..\imgui-docking\misc\debuggers\imgui.natvis" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imstb_truetype.h" />
