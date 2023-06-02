@@ -773,7 +773,7 @@ void neuro(double lerngenauichkeit,int ein,bool trai,int anzahllernzyclen, int a
             int w = 0;
             //asci umwandlung
             w = (c - 97);
-            if (w <= 0 || w >= 26)w = 26;
+            if (w < 0 || w >= 26)w = 26;
             cout << w << endl;
             cout << "Input: ";
             for (int n = 0; n < anzahleingangsneuronen; n++)
