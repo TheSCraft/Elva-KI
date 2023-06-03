@@ -133,7 +133,7 @@ int main(int, char**)
     static int zyklen = 0, groe = 1, einsneur = 1, zweineuro = 1; //varriablen zum übergeben
     static bool zur = false, prog = false, speichern = false;//modi in dennen das NN genutztwerden soll
     static int art = -1;//-1nix 0mannuell 1zufaullig 2laden
-    const char* names[] = { "Manuell", "Zufaellig", "Laden" };
+    const char* names[] = { "Manuell", "Zufaellig", "Einlesen" };
     static bool toggles[] = { true, false, false };
 
     // Main Guiloop
@@ -159,14 +159,14 @@ int main(int, char**)
         {
             //initialiesierung haupt fenster
             ImGui::Begin("Neuronales Netzwerk");                          
-            ImGui::Text("Bitte einstellungen einstellen");               
+            ImGui::Text("Bitte Einstellungen waehlen");               
             //eingaben für das neuronale netzwerk
            ImGui::Checkbox("Einstellungen", &show_another_window);
           //verschiedene einstellungen für das NN
            if (!zur)if (ImGui::Button("Tastatur Eingabe"))ImGui::SetKeyboardFocusHere();
            if (!zur)ImGui::SliderFloat("Lerngenauigkeit", &f, 0.0f, 1.0f);
            if (!zur)ImGui::SameLine();
-           if(!zur)ImGui::Text("Lerngenauigkeit = %f", f);
+           if(!zur)ImGui::Text(" = %f", f);
            if (ImGui::Button("Anfangswerte"))
                ImGui::OpenPopup("my_select_popup");
            ImGui::SameLine();
@@ -180,14 +180,14 @@ int main(int, char**)
                ImGui::EndPopup();
            }
             if(!zur)ImGui::DragInt("Trainigszyklen", &zyklen, groe, 0, 9999999);
-            ImGui::SliderInt("Neuronen ersterebene", &einsneur, 1, sim);
-            ImGui::SliderInt("Neuronen zweiterebene", &zweineuro, 1, sim);
+            ImGui::SliderInt("Neuronen erster Ebene", &einsneur, 1, sim);
+            ImGui::SliderInt("Neuronen zweiter Ebene", &zweineuro, 1, sim);
             ImGui::Checkbox("Nur testen", &zur);
             if (zur) {
                 art = 2;
             }
-            ImGui::Checkbox("Zeige einzelne lern schritte", &prog);
-            if (ImGui::IsItemHovered())ImGui::SetTooltip("Verlangsamt extrem das programm");//cout ist extrem langsam im vergleich
+            ImGui::Checkbox("Zeige einzelne Lernschritte", &prog);
+            if (ImGui::IsItemHovered())ImGui::SetTooltip("Verlangsamt extrem das Programm");//cout ist extrem langsam im Vergleich
             static char buf[64] = ""; ImGui::InputText("Name", buf, 64);
             string simon=buf;
             if (simon == "") { speichern=false; }
@@ -217,7 +217,7 @@ int main(int, char**)
                 ImGui::Text("Vokal: %f" ,outputone);
                 ImGui::Text("Konsonant: %f" ,outputtwo);
 
-                if (ImGui::Button("Schliesen"))
+                if (ImGui::Button("Schliessen"))
                     acktivwin = false;
                 ImGui::End();
             }
@@ -229,11 +229,11 @@ int main(int, char**)
             //beginn einstellungs fenster
             ImGui::Begin("Einstellungen", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
             ImGui::Text("Einstellungen");
-            ImGui::ColorEdit3("clear color", (float*)&clear_color);
-            ImGui::SliderInt("Genauichkeit von Zyklen", &groe, 0, 100);
-            ImGui::SliderInt("Ausgabe in prozent", &outt, 0, 100);
+            ImGui::ColorEdit3("Farbe zurueck setzen", (float*)&clear_color);
+            ImGui::SliderInt("Genauigkeit von Zyklen", &groe, 0, 100);
+            ImGui::SliderInt("Ausgabe in Prozent", &outt, 0, 100);
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            if (ImGui::Button("Schliesen"))
+            if (ImGui::Button("Schliessen"))
                 show_another_window = false;
             ImGui::End();
         }
