@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 
+using namespace std;
 // Deklaration der globalen Variablen und Funktionen
 
 double qMatrix[8][8], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (Learning Rate)
@@ -11,6 +12,7 @@ void ausgabearray(double a[][8]); // Funktion zur Ausgabe eines Arrays
 int zuffalszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
 double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8]); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8]); // Funktion zur Ermittlung verfügbarer Aktionen
+void zeigekarte();
 
 int main()
 {
@@ -101,6 +103,7 @@ int main()
     bool fehler = false;
     int maxr = 0, maxinde = 0;
 
+    zeigekarte();
     while(true){
         int visited[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
         fehler = false;
@@ -254,6 +257,22 @@ void ausgabearray(double a[][8])
         }
         std::cout << "\n";
     }
+}
+void zeigekarte() {
+    cout << "+---+      +---+" << endl;
+    cout << "| 6 |      | 0 | --+" << endl;
+    cout << "+---+      +---+   |         +---+" << endl;
+    cout << "  |              +---+       | 3 |" << endl;
+    cout << "  |  +---+    ---| 1 |----+  +---+" << endl;
+    cout << "  +--| 5 |---/   +---+    |    |" << endl;
+    cout << "     +---+        /     +---+  |" << endl;
+    cout << "       -\\        -      | 2 |--+" << endl;
+    cout << "         -\\ +---+       +---+" << endl;
+    cout << "           -| 4 |         /" << endl;
+    cout << "            +---+       /" << endl;
+    cout << "              \\      +---+" << endl;
+    cout << "               +-----| 7 |" << endl;
+    cout << "                     +---+" << endl;
 }
 /*
  Der Code besteht aus einer main-Funktion und mehreren Hilfsfunktionen. Die main-Funktion enthält den Hauptablauf des Q-Learning-Algorithmus. Es werden eine Q-Matrix, eine R-Matrix (Points Matrix) und andere Variablen initialisiert. Die R-Matrix enthält Belohnungen für den Übergang zwischen Zuständen.
