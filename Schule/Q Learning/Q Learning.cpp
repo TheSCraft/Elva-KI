@@ -52,16 +52,16 @@ int main()
     }
 
     // Ausgabe der R-Matrix
-    std::cout << "\nAnfangs Matrix : \n";
+    cout << "\nAnfangs Matrix : \n";
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
         {
-            std::cout << rMatrix[i][j] << "\t";
+            cout << rMatrix[i][j] << "\t";
         }
-        std::cout << "\n";
+         cout << "\n";
     }
-    std::cout << "\n\n\n";
+     cout << "\n\n\n";
 
     // Training Q Matrix
     for (i = 0; i < 500; i++)
@@ -70,11 +70,11 @@ int main()
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
         aktion = erlaubteAktion[zuffalszahl() % groesemoeglicheraktionen];
 
-        std::cout << "\nNext Step: " << aktion << "\n";
+         cout << "\nNext Step: " << aktion << "\n";
         score = update(punkt, aktion, rMatrix, qMatrix);
 
 
-        std::cout << "\nScore : " << score;
+         cout << "\nScore : " << score;
     }
 
     //Finden des maximums
@@ -89,14 +89,14 @@ int main()
         }
     }
 
-    std::cout << "\n\nTrained Q Matrix: \n";
+     cout << "\n\nTrained Q Matrix: \n";
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
         {
-            std::cout << (qMatrix[i][j] / final_max * 100.0) << "\t";
+             cout << (qMatrix[i][j] / final_max * 100.0) << "\t";
         }
-        std::cout << "\n";
+         cout << "\n";
     }
 
     int punktt;
@@ -109,14 +109,14 @@ int main()
         fehler = false;
         maxr = 0;
         maxinde = 0;
-    std::cout << "Eingabe des anfangspunktes: ";
-    std::cin >> punktt;
+     cout << "Eingabe des anfangspunktes: ";
+     cin >> punktt;
 
     // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
-    std::cout << "Weg: \n";
+     cout << "Weg: \n";
     while (visited[zielPunkt] != 1)
     {
-        std::cout << punktt << "-> ";
+         cout << punktt << "-> ";
         maxr = 0;
         maxinde = 0;
 
@@ -148,11 +148,11 @@ int main()
 
     if (fehler)
     {
-        std::cout << punktt << " | Da ist kein Weg ab hier\n";
+         cout << punktt << " | Da ist kein Weg ab hier\n";
     }
     else
     {
-        std::cout << punktt << " ist der kuerzeste Weg\n";
+         cout << punktt << " ist der kuerzeste Weg\n";
     }
 }
 }
@@ -169,7 +169,7 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8])
         }
         j++;
     }
-    std::cout << "\n";
+     cout << "\n";
     return k;
 }
 
@@ -218,7 +218,7 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8])
         }
     }
 
-    std::cout << "\nQ Max: " << temp_max;
+     cout << "\nQ Max: " << temp_max;
     ausgabearray(qMatrix);
     if (temp_max > 0)
     {
@@ -248,14 +248,14 @@ void ausgabearray(double a[][8])
 {
     int i, j;
 
-    std::cout << "\nMatrix: \n";
+     cout << "\nMatrix: \n";
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
         {
-            std::cout << a[i][j] << "\t";
+             cout << a[i][j] << "\t";
         }
-        std::cout << "\n";
+         cout << "\n";
     }
 }
 void zeigekarte() {
