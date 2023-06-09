@@ -10,7 +10,7 @@ int max_index[8], erlaubteAktion[8]; // Hilfsarrays für den maximalen Index und 
 
 void ausgabearray(double a[][8]); // Funktion zur Ausgabe eines Arrays
 int zuffalszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
-double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8]); // Funktion zur Aktualisierung der Q-Matrix
+double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8]); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();
 
@@ -21,11 +21,11 @@ int main()
     int zielPunkt = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, rMatrix[8][8], score = 0.0;  // Deklaration von final_max für das Finden des Maximums, der R-Matrix(reward), und des Punktestands
-
+    int zeigen=2;
     srand(time(nullptr)); // Initialize random seed
 
-
-
+    cout << "Lernen anzeigen? 1ja 2 nein" << endl;
+    cin >> zeigen;
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -70,11 +70,11 @@ int main()
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
         aktion = erlaubteAktion[zuffalszahl() % groesemoeglicheraktionen];
 
-         cout << "\nNext Step: " << aktion << "\n";
-        score = update(punkt, aktion, rMatrix, qMatrix);
+        if (zeigen == 1)cout << "\nNext Step: " << aktion << "\n";
+        score = update(punkt, aktion, rMatrix, qMatrix,zeigen);
 
 
-         cout << "\nScore : " << score;
+        if (zeigen == 1)cout << "\nScore : " << score;
     }
 
     //Finden des maximums
@@ -169,11 +169,10 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8])
         }
         j++;
     }
-     cout << "\n";
     return k;
 }
 
-double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8])
+double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen)
 {
     int i = 0, j = 0, k = 0, index_of_max;
     double temp_max = 0.0, max_value = 0.0, sumA = 0.0;
@@ -217,9 +216,10 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8])
             }
         }
     }
-
-     cout << "\nQ Max: " << temp_max;
-    ausgabearray(qMatrix);
+    if (zeigen == 1) {
+        cout << "\nQ Max: " << temp_max;
+        ausgabearray(qMatrix);
+    }
     if (temp_max > 0)
     {
         for (i = 0; i < 8; i++)
