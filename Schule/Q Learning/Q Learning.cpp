@@ -50,19 +50,18 @@ int main()
             }
         }
     }
-
-    // Ausgabe der R-Matrix
-    cout << "\nAnfangs Matrix : \n";
-    for (i = 0; i < 8; i++)
-    {
-        for (j = 0; j < 8; j++)
+    if (zeigen == 1) {
+        // Ausgabe der R-Matrix
+        cout << "\nReward Matrix : \n";
+        for (i = 0; i < 8; i++)
         {
-            cout << rMatrix[i][j] << "\t";
+            for (j = 0; j < 8; j++)
+            {
+                cout << rMatrix[i][j] << "\t";
+            }
+            cout << "\n";
         }
-         cout << "\n";
     }
-     cout << "\n\n\n";
-
     // Training Q Matrix
     for (i = 0; i < 500; i++)
     {
