@@ -69,7 +69,7 @@ int main()
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
         aktion = erlaubteAktion[zuffalszahl() % groesemoeglicheraktionen];
 
-        if (zeigen == 1)cout << "\nNext Step: " << aktion << "\n";
+        if (zeigen == 1)cout << "\nNaechster schrit: " << aktion << "\n";
         score = update(punkt, aktion, rMatrix, qMatrix,zeigen);
 
 
@@ -225,11 +225,11 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],in
         {
             for (j = 0; j < 8; j++)
             {
-                sumA = sumA + (qMatrix[i][j] / temp_max);
+                sumA += (qMatrix[i][j] / temp_max);
             }
         }
 
-        sumA = sumA * 100;
+        sumA *= 100;
         return sumA;
     }
     else
