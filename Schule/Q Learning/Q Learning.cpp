@@ -9,14 +9,13 @@ double qMatrix[8][8], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (
 int max_index[8], erlaubteAktion[8]; // Hilfsarrays für den maximalen Index und verfügbare Aktionen
 
 void ausgabearray(double a[][8]); // Funktion zur Ausgabe eines Arrays
-int zuffalszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
+int zufallszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
 double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8]); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();
 
 int main()
 {
-    
     int i, j;//temp für Schleifen
     int zielPunkt = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
@@ -24,7 +23,7 @@ int main()
     int zeigen=2;
     srand(time(nullptr)); // Initialize random seed
 
-    cout << "Lernen anzeigen? 1ja 2 nein" << endl;
+    cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
     cin >> zeigen;
     for (i = 0; i < 8; i++)
     {
@@ -65,11 +64,11 @@ int main()
     // Training Q Matrix
     for (i = 0; i < 500; i++)
     {
-        punkt = zuffalszahl();
+        punkt = zufallszahl();
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
-        aktion = erlaubteAktion[zuffalszahl() % groesemoeglicheraktionen];
+        aktion = erlaubteAktion[zufallszahl() % groesemoeglicheraktionen];
 
-        if (zeigen == 1)cout << "\nNaechster schrit: " << aktion << "\n";
+        if (zeigen == 1)cout << "\nNaechster Schritt: " << aktion << "\n";
         score = update(punkt, aktion, rMatrix, qMatrix,zeigen);
 
 
@@ -108,7 +107,7 @@ int main()
         fehler = false;
         maxr = 0;
         maxinde = 0;
-     cout << "Eingabe des anfangspunktes: ";
+     cout << "Eingabe des Anfangspunktes: ";
      cin >> punktt;
 
     // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
@@ -196,7 +195,7 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],in
     }
 
     //Auswahl einer zufälligen Zahl as dem maximum
-    int a = zuffalszahl() % j;
+    int a = zufallszahl() % j;
     index_of_max = max_index[a];
 
     max_value = qMatrix[aktion][index_of_max];
@@ -238,7 +237,7 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],in
     }
 }
 
-int zuffalszahl()
+int zufallszahl()
 {
     return rand() % 8;
 }
@@ -274,13 +273,13 @@ void zeigekarte() {
     cout << "                     +---+" << endl;
 }
 /*
- Der Code besteht aus einer main-Funktion und mehreren Hilfsfunktionen. Die main-Funktion enthält den Hauptablauf des Q-Learning-Algorithmus. Es werden eine Q-Matrix, eine R-Matrix (Points Matrix) und andere Variablen initialisiert. Die R-Matrix enthält Belohnungen für den Übergang zwischen Zuständen.
+Der Code besteht aus einer main-Funktion und mehreren Hilfsfunktionen. Die main-Funktion enthält den Hauptablauf des Q-Learning-Algorithmus. Es werden eine Q-Matrix, eine R-Matrix (Points Matrix) und andere Variablen initialisiert. Die R-Matrix enthält Belohnungen für den Übergang zwischen Zuständen.
 
 Der Algorithmus trainiert die Q-Matrix durch wiederholtes Auswählen einer zufälligen Startposition, Auswahl einer zufälligen Aktion und Aktualisierung der Q-Matrix basierend auf den erzielten Belohnungen. Dieser Trainingsprozess wird 500 Mal wiederholt. Nach dem Training wird die trainierte Q-Matrix ausgegeben.
 
 Schließlich wird der Pfad basierend auf der trainierten Q-Matrix gefunden, indem der Zustand schrittweise aktualisiert wird, bis der Zielzustand erreicht ist.
 
-Die Funktionen erlaubteAktionen, update, zuffalszahl und ausgabearray sind Hilfsfunktionen, die spezifische Aufgaben erfüllen und im Hauptablauf verwendet werden.
+Die Funktionen erlaubteAktionen, update, zufallszahl und ausgabearray sind Hilfsfunktionen, die spezifische Aufgaben erfüllen und im Hauptablauf verwendet werden.
 
 Bitte beachte, dass der Code keine Fehlerbehandlung oder Eingabeüberprüfung enthält. Es wird davon ausgegangen, dass die Eingaben korrekt sind und der Code problemlos ausgeführt werden kann.
 */
