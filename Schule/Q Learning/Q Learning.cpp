@@ -20,11 +20,13 @@ int main()
     int zielPunkt = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, rMatrix[8][8], score = 0.0;  // Deklaration von final_max für das Finden des Maximums, der R-Matrix(reward), und des Punktestands
-    int zeigen=2;
+    int zeigen=2,ziel=7;
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
     cin >> zeigen;
+    cout << "Was soll das ziel sein:" << endl;
+    cin >> ziel;
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -33,20 +35,26 @@ int main()
             qMatrix[i][j] = 0.0;
 
             // Festlegen der Belohnungen in der R-Matrix
-            if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4))
+            if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
             {
                 rMatrix[i][j] = 0.0;
             }
             // Festlegen der Belohnungen in der R-Matrix (symmetrisch)
-            if ((j == 0 && i == 1) || (j == 1 && i == 5) || (j == 5 && i == 6) || (j == 5 && i == 4) || (j == 1 && i == 2) || (j == 2 && i == 3) || (j == 2 && i == 7) || (j == 4 && i == 7) || (j == 1 && i == 4))
+            if ((j == 0 && i == 1) || (j == 1 && i == 5) || (j == 5 && i == 6) || (j == 5 && i == 4) || (j == 1 && i == 2) || (j == 2 && i == 3) || (j == 2 && i == 7) || (j == 4 && i == 7) || (j == 1 && i == 4) || (j == 2 && i == 7) || (j == 4 && i == 7))
             {
                 rMatrix[i][j] = 0.0;
             }
             // Festlegen der Belohnungen in der R-Matrix (Zielzustände)
-            if ((i == 2 && j == 7) || (i == 7 && j == 7) || (i == 4 && j == 7))
-            {
-                rMatrix[i][j] = 100.0;
-            }
+            if (ziel == 7 && ((i == 2 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 6 && ((i == 5 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 5 && ((i == 6 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel) || (i == 1 && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 4 && ((i == 5 && j == ziel) || (i == ziel && j == ziel) || (i == 1 && j == ziel) || (i == 7 && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 3 && ((i == 2 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 2 && ((i == 1 && j == ziel) || (i == ziel && j == ziel) || (i == 3 && j == ziel) || (i == 7 && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 1 && ((i == 0 && j == ziel) || (i == ziel && j == ziel) || (i == 2 && j == ziel) || (i == 4 && j == ziel) || (i == 5 && j == ziel)))rMatrix[i][j] = 100.0;
+            if (ziel == 0 && ((i == 1 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
+
+            
         }
     }
     if (zeigen == 1) {
