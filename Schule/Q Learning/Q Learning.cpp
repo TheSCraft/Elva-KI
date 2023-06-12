@@ -17,14 +17,15 @@ void zeigekarte();
 int main()
 {
     int i, j;//temp für Schleifen
-    int zielPunkt = 7;  // Deklaration der Anfangs- und Endzustände
+    int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, rMatrix[8][8], score = 0.0;  // Deklaration von final_max für das Finden des Maximums, der R-Matrix(reward), und des Punktestands
-    int zeigen=2,ziel=7;
+    int zeigen=2;
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
     cin >> zeigen;
+    zeigekarte();
     cout << "Was soll das ziel sein:" << endl;
     cin >> ziel;
     for (i = 0; i < 8; i++)
@@ -44,15 +45,15 @@ int main()
             {
                 rMatrix[i][j] = 0.0;
             }
-            // Festlegen der Belohnungen in der R-Matrix (Zielzustände)
-            if (ziel == 7 && ((i == 2 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 6 && ((i == 5 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 5 && ((i == 6 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel) || (i == 1 && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 4 && ((i == 5 && j == ziel) || (i == ziel && j == ziel) || (i == 1 && j == ziel) || (i == 7 && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 3 && ((i == 2 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 2 && ((i == 1 && j == ziel) || (i == ziel && j == ziel) || (i == 3 && j == ziel) || (i == 7 && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 1 && ((i == 0 && j == ziel) || (i == ziel && j == ziel) || (i == 2 && j == ziel) || (i == 4 && j == ziel) || (i == 5 && j == ziel)))rMatrix[i][j] = 100.0;
-            if (ziel == 0 && ((i == 1 && j == ziel) || (i == ziel && j == ziel)))rMatrix[i][j] = 100.0;
+            // Festlegen der Belohnungen in der R-Matrix (Zielzustände)anhand der angedockten punkte
+            if (ziel == 7 && ((i == 2 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 6 && ((i == 5 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 5 && ((i == 6 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel) || (i == 1 && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 4 && ((i == 5 && j == ziel) || (i == ziel && j == ziel) || (i == 1 && j == ziel) || (i == 7 && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 3 && ((i == 2 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 2 && ((i == 1 && j == ziel) || (i == ziel && j == ziel) || (i == 3 && j == ziel) || (i == 7 && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 1 && ((i == 0 && j == ziel) || (i == ziel && j == ziel) || (i == 2 && j == ziel) || (i == 4 && j == ziel) || (i == 5 && j == ziel))) rMatrix[i][j] = 100.0;
+            if (ziel == 0 && ((i == 1 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
 
             
         }
@@ -120,7 +121,7 @@ int main()
 
     // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
      cout << "Weg: \n";
-    while (visited[zielPunkt] != 1)
+    while (visited[ziel] != 1)
     {
          cout << punktt << "-> ";
         maxr = 0;
@@ -146,7 +147,7 @@ int main()
             break;
         }
 
-        if (punktt == zielPunkt)
+        if (punktt == ziel)
         {
             break;
         }
@@ -154,7 +155,7 @@ int main()
 
     if (fehler)
     {
-         cout << punktt << " | Da ist kein Weg ab hier\n";
+         cout << " | Da ist kein Weg ab hier\n";
     }
     else
     {
