@@ -81,4 +81,4 @@
   
   - Matrix welche mit Reinforcment Learning trainiert wird
   
-  - Findet den weg zur 7 in einem Labyrint
+  - Findet den weg zu einem bestimmten Punkt in einem Labyrint
