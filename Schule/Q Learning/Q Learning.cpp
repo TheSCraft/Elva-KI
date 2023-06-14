@@ -12,7 +12,7 @@ void ausgabearray(double a[][8]); // Funktion zur Ausgabe eines Arrays
 int zufallszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
 double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8]); // Funktion zur Ermittlung verfügbarer Aktionen
-void zeigekarte();
+void zeigekarte();//zeigt das labyrint
 
 int main()
 {
@@ -24,26 +24,26 @@ int main()
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
-    cin >> zeigen;
+    cin >> zeigen;//zeigen der einzelnen lern schritte zum verschnellern oder verlangsamen des programs
     zeigekarte();
     cout << "Was soll das ziel sein:" << endl;
-    cin >> ziel;
+    cin >> ziel;//devenition des ziel punktes
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
         {
-            rMatrix[i][j] = -1.0;
+            rMatrix[i][j] = -1.0;//unmoegliche zuege
             qMatrix[i][j] = 0.0;
 
             // Festlegen der Belohnungen in der R-Matrix
             if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
             {
-                rMatrix[i][j] = 0.0;
+                rMatrix[i][j] = 0.0;//moeglich
             }
             // Festlegen der Belohnungen in der R-Matrix (symmetrisch)
             if ((j == 0 && i == 1) || (j == 1 && i == 5) || (j == 5 && i == 6) || (j == 5 && i == 4) || (j == 1 && i == 2) || (j == 2 && i == 3) || (j == 2 && i == 7) || (j == 4 && i == 7) || (j == 1 && i == 4) || (j == 2 && i == 7) || (j == 4 && i == 7))
             {
-                rMatrix[i][j] = 0.0;
+                rMatrix[i][j] = 0.0;//moeglich
             }
             // Festlegen der Belohnungen in der R-Matrix (Zielzustände)anhand der angedockten punkte
             if (ziel == 7 && ((i == 2 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel))) rMatrix[i][j] = 100.0;
@@ -106,8 +106,8 @@ int main()
          cout << "\n";
     }
 
-    int punktt;
-    bool fehler = false;
+    int punktt;//anfangspunkt
+    bool fehler = false;//für unmoegliche zuege
     int maxr = 0, maxinde = 0;
 
     zeigekarte();
@@ -117,7 +117,7 @@ int main()
         maxr = 0;
         maxinde = 0;
      cout << "Eingabe des Anfangspunktes: ";
-     cin >> punktt;
+     cin >> punktt;//eingabe des start punktes von wem zum ende navigiert werden soll
 
     // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
      cout << "Weg: \n";
