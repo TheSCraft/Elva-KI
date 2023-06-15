@@ -45,16 +45,9 @@ int main()
             {
                 rMatrix[i][j] = 0.0;//moeglich
             }
-            // Festlegen der Belohnungen in der R-Matrix (Zielzustände)anhand der angedockten punkte
-            if (ziel == 7 && ((i == 2 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 6 && ((i == 5 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 5 && ((i == 6 && j == ziel) || (i == ziel && j == ziel) || (i == 4 && j == ziel) || (i == 1 && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 4 && ((i == 5 && j == ziel) || (i == ziel && j == ziel) || (i == 1 && j == ziel) || (i == 7 && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 3 && ((i == 2 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 2 && ((i == 1 && j == ziel) || (i == ziel && j == ziel) || (i == 3 && j == ziel) || (i == 7 && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 1 && ((i == 0 && j == ziel) || (i == ziel && j == ziel) || (i == 2 && j == ziel) || (i == 4 && j == ziel) || (i == 5 && j == ziel))) rMatrix[i][j] = 100.0;
-            if (ziel == 0 && ((i == 1 && j == ziel) || (i == ziel && j == ziel))) rMatrix[i][j] = 100.0;
-
+            // Festlegen der Belohnungen in der R-Matrix (Zielzustände)anhand der angedockten punkte 
+            if(rMatrix[i][ziel]==0.0||(i==j&&i==ziel))rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
+            
             
         }
     }
