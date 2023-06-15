@@ -16,7 +16,7 @@ void zeigekarte();//zeigt das labyrint
 
 int main()
 {
-    int i, j;//temp für Schleifen
+    int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, rMatrix[8][8], score = 0.0;  // Deklaration von final_max für das Finden des Maximums, der R-Matrix(reward), und des Punktestands
@@ -28,9 +28,9 @@ int main()
     zeigekarte();
     cout << "Was soll das ziel sein:" << endl;
     cin >> ziel;//devenition des ziel punktes
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (j = 0; j < 8; j++)
+        for (int j = 0; j < 8; j++)
         {
             rMatrix[i][j] = -1.0;//unmoegliche zuege
             qMatrix[i][j] = 0.0;
@@ -54,9 +54,9 @@ int main()
     if (zeigen == 1) {
         // Ausgabe der R-Matrix
         cout << "\nReward Matrix : \n";
-        for (i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
-            for (j = 0; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 cout << rMatrix[i][j] << "\t";
             }
@@ -64,7 +64,7 @@ int main()
         }
     }
     // Training Q Matrix
-    for (i = 0; i < 500; i++)
+    for (int i = 0; i < 500; i++)
     {
         punkt = zufallszahl();
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
@@ -78,9 +78,9 @@ int main()
     }
 
     //Finden des maximums
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (j = 0; j < 8; j++)
+        for (int j = 0; j < 8; j++)
         {
             if (final_max < qMatrix[i][j])
             {
@@ -90,9 +90,9 @@ int main()
     }
 
      cout << "\n\nTrained Q Matrix: \n";
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (j = 0; j < 8; j++)
+        for (int j = 0; j < 8; j++)
         {
              cout << (qMatrix[i][j] / final_max * 100.0) << "\t";
         }
@@ -120,7 +120,7 @@ int main()
         maxr = 0;
         maxinde = 0;
 
-        for (i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             if (visited[i] == 0)
             {
@@ -174,11 +174,11 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8])
 
 double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen)
 {
-    int i = 0, j = 0, k = 0, index_of_max;
+    int j = 0, k = 0, index_of_max;
     double temp_max = 0.0, max_value = 0.0, sumA = 0.0;
 
     //Einlesen der indexe wo max im punkt ist
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
         max_index[i] = 0;
 
@@ -206,9 +206,9 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],in
     //Haupt update der Matrix
     qMatrix[punkt][aktion] = rMatrix[punkt][aktion] + (gammaLR * max_value);
     temp_max = 0.0;
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (j = 0; j < 8; j++)
+        for (int j = 0; j < 8; j++)
         {
             if (qMatrix[i][j] > temp_max)
             {
@@ -222,9 +222,9 @@ double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],in
     }
     if (temp_max > 0)
     {
-        for (i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
-            for (j = 0; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 sumA += (qMatrix[i][j] / temp_max);
             }
@@ -246,12 +246,11 @@ int zufallszahl()
 
 void ausgabearray(double a[][8])
 {
-    int i, j;
 
      cout << "\nMatrix: \n";
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (j = 0; j < 8; j++)
+        for (int j = 0; j < 8; j++)
         {
              cout << a[i][j] << "\t";
         }
