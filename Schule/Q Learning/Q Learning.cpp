@@ -37,14 +37,18 @@ int main()
 
             
             // Festlegen der Belohnungen in der R-Matrix
-            if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
-            {
-                rMatrix[i][j] = 0.0;//moeglich
-            }
-            // Festlegen der Belohnungen in der R-Matrix (symmetrisch)
-            if ((j == 0 && i == 1) || (j == 1 && i == 5) || (j == 5 && i == 6) || (j == 5 && i == 4) || (j == 1 && i == 2) || (j == 2 && i == 3) || (j == 2 && i == 7) || (j == 4 && i == 7) || (j == 1 && i == 4) || (j == 2 && i == 7) || (j == 4 && i == 7))
-            {
-                rMatrix[i][j] = 0.0;//moeglich
+            for (int g = 0; g < 2; g++) {
+                if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
+                {
+                    if(g==1){
+                    t = i;
+                    i = j;
+                    j = t;}
+                    rMatrix[i][j] = 0.0;//moeglich
+                }
+                t = i;
+                i = j;
+                j = t;
             }
             if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
             if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
