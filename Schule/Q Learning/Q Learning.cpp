@@ -35,6 +35,7 @@ int main()
             rMatrix[i][j] = -1.0;//unmoegliche zuege
             qMatrix[i][j] = 0.0;
 
+            
             // Festlegen der Belohnungen in der R-Matrix
             if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
             {
@@ -45,9 +46,8 @@ int main()
             {
                 rMatrix[i][j] = 0.0;//moeglich
             }
-            // Festlegen der Belohnungen in der R-Matrix (Zielzustände)anhand der angedockten punkte 
-            if(rMatrix[i][ziel]==0.0||(i==j&&i==ziel))rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
-            
+            if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
+            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
             
         }
     }
