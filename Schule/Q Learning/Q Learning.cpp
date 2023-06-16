@@ -19,7 +19,15 @@ int main()
     int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
-    double final_max = 0.0, rMatrix[8][8], score = 0.0;  // Deklaration von final_max für das Finden des Maximums, der R-Matrix(reward), und des Punktestands
+    double final_max = 0.0, score = 0.0;  // Deklaration von final_max für das Finden des Maximums und des Punktestands
+    double rMatrix[8][8] = { {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1},
+                            {-1,-1,-1,-1,-1,-1,-1,-1} };//-1 sind unmögliche verbindungen sinn:[von][nach]
     int zeigen=2;
     srand(time(nullptr)); // Initialize random seed
 
@@ -32,19 +40,13 @@ int main()
     {
         for (int j = 0; j < 8; j++)
         {
-            rMatrix[i][j] = -1.0;//unmoegliche zuege
             qMatrix[i][j] = 0.0;
-
             
             // Festlegen der Belohnungen in der R-Matrix
             if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
             {
                 rMatrix[i][j] = 0.0;//moeglich
-            }
-            // Festlegen der Belohnungen in der R-Matrix (symmetrisch)
-            if ((j == 0 && i == 1) || (j == 1 && i == 5) || (j == 5 && i == 6) || (j == 5 && i == 4) || (j == 1 && i == 2) || (j == 2 && i == 3) || (j == 2 && i == 7) || (j == 4 && i == 7) || (j == 1 && i == 4) || (j == 2 && i == 7) || (j == 4 && i == 7))
-            {
-                rMatrix[i][j] = 0.0;//moeglich
+                rMatrix[j][i] = 0.0;//auch in die andere richtung
             }
             if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
             if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
