@@ -4,31 +4,29 @@
 
 using namespace std;
 // Deklaration der globalen Variablen und Funktionen
-
-double qMatrix[8][8], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (Learning Rate)
-int max_index[8], erlaubteAktion[8]; // Hilfsarrays für den maximalen Index und verfügbare Aktionen
-
-void ausgabearray(double a[][8]); // Funktion zur Ausgabe eines Arrays
+constexpr auto simo = 8;
+double qMatrix[simo][simo], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (Learning Rate)
+int max_index[simo], erlaubteAktion[simo]; // Hilfsarrays für den maximalen Index und verfügbare Aktionen
+void ausgabearray(double a[][simo]); // Funktion zur Ausgabe eines Arrays
 int zufallszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
-double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
-int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8]); // Funktion zur Ermittlung verfügbarer Aktionen
+double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
+int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo]); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();//zeigt das labyrint
 
 int main()
 {
+    int zeigen=2;
     int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, score = 0.0;  // Deklaration von final_max für das Finden des Maximums und des Punktestands
-    double rMatrix[8][8] = { {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1},
-                            {-1,-1,-1,-1,-1,-1,-1,-1} };//-1 sind unmögliche verbindungen sinn:[von][nach]
-    int zeigen=2;
+    double rMatrix[simo][simo];//-1 sind unmögliche verbindungen sinn:[von][nach]
+    for (int i = 0; i < simo; i++){
+        for (int j = 0; j < simo; j++) {
+            rMatrix[j][i] = -1;
+        }
+    }
+    
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
@@ -159,7 +157,7 @@ int main()
 }
 }
 
-int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8])
+int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo])
 {
     int k = 0, j = 0;
     while (j < 8)
@@ -174,7 +172,7 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][8])
     return k;
 }
 
-double update(int punkt, int aktion, double rMatrix[][8], double qMatrix[][8],int zeigen)
+double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen)
 {
     int j = 0, k = 0, index_of_max;
     double temp_max = 0.0, max_value = 0.0, sumA = 0.0;
@@ -246,7 +244,7 @@ int zufallszahl()
     return rand() % 8;
 }
 
-void ausgabearray(double a[][8])
+void ausgabearray(double a[][simo])
 {
 
      cout << "\nMatrix: \n";
