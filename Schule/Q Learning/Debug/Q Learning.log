@@ -1,4 +1,5 @@
 ﻿  Q Learning.cpp
-C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(24,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
-C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(137,45): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(30,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(130,45): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(19,9): warning C4101: "t": Unreferenzierte lokale Variable
   Q Learning.vcxproj -> C:\c++projekt\Gitschule\Schule\Schule\Debug\Q Learning.exe
