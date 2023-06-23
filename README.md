@@ -75,6 +75,8 @@
 # Forward Pass
 ![Forward-Pass](https://github.com/TheSCraft/Schule/blob/Main/Schule/Neuronales%20Network%20Forward%20pass%20-%20OneNote%2023.05.2023%2010_45_12.png)
 
+# Backpropation
+![Backpropogation](https://github.com/TheSCraft/Elva-KI/blob/Main/Schule/Neuronales%20Network%20Backpropagation%20-%20OneNote%2022.06.2023%2018_34_36.png)
 # Q Learning
 
 <h3>Q Learning</h3>
