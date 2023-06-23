@@ -46,8 +46,8 @@ int main()
                 rMatrix[i][j] = 0.0;//moeglich
                 rMatrix[j][i] = 0.0;//auch in die andere richtung
             }
-            if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
-            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt oder es das zeil ist
+            if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
+            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
             
         }
     }
