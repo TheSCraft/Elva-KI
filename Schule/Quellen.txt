@@ -1,2 +1,0 @@
-https://cplusplus.com/reference/cstdio/
-https://cplusplus.com/reference/vector/vector/
