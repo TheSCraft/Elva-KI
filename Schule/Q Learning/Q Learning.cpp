@@ -7,15 +7,15 @@ using namespace std;
 constexpr auto simo = 8;
 double qMatrix[simo][simo], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (Learning Rate)
 int max_index[simo], erlaubteAktion[simo]; // Hilfsarrays für den maximalen Index und verfügbare Aktionen
-void ausgabearray(double a[][simo]); // Funktion zur Ausgabe eines Arrays
-int zufallszahl(); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
-double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen); // Funktion zur Aktualisierung der Q-Matrix
-int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo]); // Funktion zur Ermittlung verfügbarer Aktionen
+void ausgabearray(double a[][simo],int felder); // Funktion zur Ausgabe eines Arrays
+int zufallszahl(int felder); // Funktion, die eine zufällige Zahl von 0 bis 7 zurückgibt
+double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen,int felder); // Funktion zur Aktualisierung der Q-Matrix
+int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo],int felder); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();//zeigt das labyrint
 
 int main()
 {
-    int zeigen=2;
+    int zeigen=2,labyrint;
     int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
@@ -26,37 +26,73 @@ int main()
             rMatrix[j][i] = -1;
         }
     }
-    
+    int felder = 0, verbunden = 0;
+
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
     cin >> zeigen;//zeigen der einzelnen lern schritte zum verschnellern oder verlangsamen des programs
-    zeigekarte();
-    cout << "Was soll das ziel sein:" << endl;
-    cin >> ziel;//devenition des ziel punktes
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
+    cout << "Labyrint einlesen oder wählen? 1 einlesen 2voreingestellt" << endl;
+    cin >> labyrint;
+    if (labyrint == 1) {
+        system("CLS");
+        cout << "Wieviele Felder hat dein Labyrint?" << endl;
+        cout << "Felder: ";
+        cin >> felder;
+        for (int i = 0; i < felder; i++)
         {
-            qMatrix[i][j] = 0.0;
+            cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;
             
-            // Festlegen der Belohnungen in der R-Matrix
-            if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
+            do
             {
-                rMatrix[i][j] = 0.0;//moeglich
-                rMatrix[j][i] = 0.0;//auch in die andere richtung
-            }
-            if (rMatrix[i][ziel] == 0.0 )rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
-            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
+                cin >> verbunden;
+                rMatrix[i][verbunden] = 0.0;//moeglich
+                rMatrix[verbunden][i] = 0.0;//auch in die andere richtung
+            } while (verbunden<felder);
+                
             
+        }
+        cout << "Was soll das ziel sein:" << endl;
+        cin >> ziel;//devenition des ziel punktes
+        for (int i = 0; i < felder; i++)
+        {
+            for (int j = 0; j < felder; j++)
+            {
+                qMatrix[i][j] = 0.0;
+                if (rMatrix[i][ziel] == 0.0)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
+                if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
+            }
+        }
+    }
+    if (labyrint == 2) {
+        felder = 8;
+        zeigekarte();
+        cout << "Was soll das ziel sein:" << endl;
+        cin >> ziel;//devenition des ziel punktes
+        for (int i = 0; i < felder; i++)
+        {
+            for (int j = 0; j < felder; j++)
+            {
+                qMatrix[i][j] = 0.0;
+
+                // Festlegen der Belohnungen in der R-Matrix
+                if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
+                {
+                    rMatrix[i][j] = 0.0;//moeglich
+                    rMatrix[j][i] = 0.0;//auch in die andere richtung
+                }
+                if (rMatrix[i][ziel] == 0.0)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
+                if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
+
+            }
         }
     }
     if (zeigen == 1) {
         // Ausgabe der R-Matrix
         cout << "\nReward Matrix : \n";
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < felder; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < felder; j++)
             {
                 cout << rMatrix[i][j] << "\t";
             }
@@ -66,21 +102,21 @@ int main()
     // Training Q Matrix
     for (int i = 0; i < 500; i++)
     {
-        punkt = zufallszahl();
-        groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix);
-        aktion = erlaubteAktion[zufallszahl() % groesemoeglicheraktionen];
+        punkt = zufallszahl(felder);
+        groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix,felder);
+        aktion = erlaubteAktion[zufallszahl(felder) % groesemoeglicheraktionen];
 
         if (zeigen == 1)cout << "\nNaechster Schritt: " << aktion << "\n";
-        score = update(punkt, aktion, rMatrix, qMatrix,zeigen);
+        score = update(punkt, aktion, rMatrix, qMatrix,zeigen,felder);
 
 
         if (zeigen == 1)cout << "\nScore : " << score;
     }
 
     //Finden des maximums
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < felder; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < felder; j++)
         {
             if (final_max < qMatrix[i][j])
             {
@@ -90,9 +126,9 @@ int main()
     }
 
      cout << "\n\nTrained Q Matrix: \n";
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < felder; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < felder; j++)
         {
              cout << (qMatrix[i][j] / final_max * 100.0) << "\t";
         }
@@ -103,9 +139,9 @@ int main()
     bool fehler = false;//für unmoegliche zuege
     int maxr = 0, maxinde = 0;
 
-    zeigekarte();
+    if(labyrint==2)zeigekarte();
     while(true){
-        int visited[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        int visited[simo] = { 0 };
         fehler = false;
         maxr = 0;
         maxinde = 0;
@@ -120,7 +156,7 @@ int main()
         maxr = 0;
         maxinde = 0;
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < felder; i++)
         {
             if (visited[i] == 0)
             {
@@ -157,10 +193,10 @@ int main()
 }
 }
 
-int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo])
+int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo],int felder)
 {
     int k = 0, j = 0;
-    while (j < 8)
+    while (j < felder)
     {
         if (rMatrix[state][j] >= 0.0)
         {
@@ -172,13 +208,13 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo])
     return k;
 }
 
-double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen)
+double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen,int felder)
 {
     int j = 0, k = 0, index_of_max;
     double temp_max = 0.0, max_value = 0.0, sumA = 0.0;
 
     //Einlesen der indexe wo max im punkt ist
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < felder; i++)
     {
         max_index[i] = 0;
 
@@ -197,7 +233,7 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
     }
 
     //Auswahl einer zufälligen Zahl as dem maximum
-    int a = zufallszahl() % j;
+    int a = zufallszahl(felder) % j;
     index_of_max = max_index[a];
 
     max_value = qMatrix[aktion][index_of_max];
@@ -206,9 +242,9 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
     //Haupt update der Matrix
     qMatrix[punkt][aktion] = rMatrix[punkt][aktion] + (gammaLR * max_value);
     temp_max = 0.0;
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < felder; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < felder; j++)
         {
             if (qMatrix[i][j] > temp_max)
             {
@@ -218,13 +254,13 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
     }
     if (zeigen == 1) {
         cout << "\nQ Max: " << temp_max;
-        ausgabearray(qMatrix);
+        ausgabearray(qMatrix,felder);
     }
     if (temp_max > 0)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < felder; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < felder; j++)
             {
                 sumA += (qMatrix[i][j] / temp_max);
             }
@@ -239,18 +275,18 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
     }
 }
 
-int zufallszahl()
+int zufallszahl(int felder)
 {
-    return rand() % 8;
+    return rand() % felder;
 }
 
-void ausgabearray(double a[][simo])
+void ausgabearray(double a[][simo],int felder)
 {
 
      cout << "\nMatrix: \n";
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < felder; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < felder; j++)
         {
              cout << a[i][j] << "\t";
         }
