@@ -35,13 +35,14 @@ int main()
     cout << "Labyrint einlesen oder wählen? 1 einlesen 2voreingestellt" << endl;
     cin >> labyrint;
     if (labyrint == 1) {
-        system("CLS");
+        system("CLS");//Löscht die Konsole
         cout << "Wieviele Felder hat dein Labyrint?" << endl;
         cout << "Felder: ";
-        cin >> felder;
+        cin >> felder;//weiviele felder das labyrint hat
+        cout << "Wenn fertig " << felder + 1 << " eingeben" << endl;
         for (int i = 0; i < felder; i++)
         {
-            cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;
+            cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;//Mit welchem feld welches feld verbunden ist
             
             do
             {
