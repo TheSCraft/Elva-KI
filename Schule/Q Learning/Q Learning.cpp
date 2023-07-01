@@ -31,7 +31,7 @@ int main()
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
-    cin >> zeigen;//zeigen der einzelnen lern schritte zum verschnellern oder verlangsamen des programs
+    cin >> zeigen;//zeigen der einzelnen Lernschritte zum verschnellern oder verlangsamen des programs
     cout << "Labyrint einlesen oder wählen? 1 einlesen 2voreingestellt" << endl;
     cin >> labyrint;
     if (labyrint == 1) {
