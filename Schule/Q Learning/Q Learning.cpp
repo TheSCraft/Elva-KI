@@ -1,6 +1,10 @@
 //Lösung eines MDP(Markov Decision Process) von Simon Seitz
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
+#include <cstring>
+#include <__msvc_all_public_headers.hpp>
+
 
 using namespace std;
 // Deklaration der globalen Variablen und Funktionen
@@ -21,9 +25,12 @@ int main()
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, score = 0.0;  // Deklaration von final_max für das Finden des Maximums und des Punktestands
     double rMatrix[simo][simo];//-1 sind unmögliche verbindungen sinn:[von][nach]
+    string fini, datein;//zum speichern
+
     for (int i = 0; i < simo; i++){
         for (int j = 0; j < simo; j++) {
             rMatrix[j][i] = -1;
+            qMatrix[i][j] = 0.0;
         }
     }
     int felder = 0, verbunden = 0;
@@ -32,7 +39,7 @@ int main()
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
     cin >> zeigen;//zeigen der einzelnen Lernschritte zum verschnellern oder verlangsamen des programs
-    cout << "Labyrint einlesen oder wählen? 1 einlesen 2voreingestellt" << endl;
+    cout << "Labyrint einlesen oder wählen? 1 einlesen 2 voreingestellt 3 dateiladen" << endl;
     cin >> labyrint;
     if (labyrint == 1) {
         system("CLS");//Löscht die Konsole
@@ -53,28 +60,39 @@ int main()
                 
             
         }
-        cout << "Was soll das ziel sein:" << endl;
-        cin >> ziel;//devenition des ziel punktes
-        for (int i = 0; i < felder; i++)
-        {
-            for (int j = 0; j < felder; j++)
-            {
-                qMatrix[i][j] = 0.0;
-                if (rMatrix[i][ziel] == 0.0)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
-                if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
-            }
+ 
+        cout << "Speichern 1 ja 2 nein" << endl;
+        cin >> t;
+        if (t == 1) {
+            cout << "Dateiname: ";
+            cin >> datein;
+
+            fini = "saves\\";
+            fini += datein;
+            fini += ".bin";
+            ofstream outputFile(fini, std::ios::out | std::ios::binary);
+            outputFile.write(reinterpret_cast<char*>(rMatrix), simo * simo * sizeof(double));
+            outputFile.close();
+            fini = "saves\\";
+            fini += datein;
+            fini += "f.bin";
+            ofstream outputFilee(fini, std::ios::out | std::ios::binary);
+            outputFilee.seekp(0, ios::beg);
+            outputFilee.write(reinterpret_cast<const char*>(to_string(felder).c_str()), sizeof(int));
+            outputFilee.close();
+
+           
         }
     }
     if (labyrint == 2) {
         felder = 8;
         zeigekarte();
-        cout << "Was soll das ziel sein:" << endl;
-        cin >> ziel;//devenition des ziel punktes
+
         for (int i = 0; i < felder; i++)
         {
             for (int j = 0; j < felder; j++)
             {
-                qMatrix[i][j] = 0.0;
+                
 
                 // Festlegen der Belohnungen in der R-Matrix
                 if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
@@ -82,10 +100,39 @@ int main()
                     rMatrix[i][j] = 0.0;//moeglich
                     rMatrix[j][i] = 0.0;//auch in die andere richtung
                 }
-                if (rMatrix[i][ziel] == 0.0)rMatrix[i][j] = 100.0;//wen es ne verbindung zum ziel gibt
-                if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
 
             }
+        }
+    }
+
+    if (labyrint == 3) {
+        system("CLS");//Löscht die Konsole
+        cout << "Dateiname: ";
+        cin >> datein;
+
+        fini = "saves";
+        fini += datein;
+        fini += ".bin";
+        ifstream inputFile(fini, std::ios::in | std::ios::binary);
+        inputFile.read(reinterpret_cast<char*>(rMatrix), simo * simo * sizeof(double));
+        inputFile.close();
+        fini = "saves";
+        fini += datein;
+        fini += "f.bin";
+        ifstream inputFilee(fini, std::ios::in | std::ios::binary);
+        inputFilee.read(reinterpret_cast<char*>(felder),  sizeof(int));
+        inputFilee.close();
+    }
+
+    cout << "Was soll das ziel sein:" << endl;
+    cin >> ziel;//devenition des ziel punktes
+ 
+    for (int i = 0; i < felder; i++)
+    {
+        for (int j = 0; j < felder; j++)
+        {
+            if (rMatrix[i][ziel] != -1)rMatrix[i][ziel] = 100.0;//wen es ne verbindung zum ziel gibt
+            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
         }
     }
     if (zeigen == 1) {

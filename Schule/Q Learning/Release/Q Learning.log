@@ -1,10 +1,35 @@
 ﻿  Q Learning.cpp
-C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(30,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
-C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(130,45): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
-C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(19,9): warning C4101: "t": Unreferenzierte lokale Variable
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\bit(12): warning STL4038: The contents of <bit> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\compare(13): warning STL4038: The contents of <compare> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\concepts(13): warning STL4038: The contents of <concepts> are available only with C++20 concepts support.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\coroutine(18): warning STL4038: The contents of <coroutine> are available only with C++20 or later or /await:strict.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\numbers(12): warning STL4038: The contents of <numbers> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\source_location(12): warning STL4038: The contents of <source_location> are available only with C++20 consteval support.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\any(13): warning STL4038: The contents of <any> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\charconv(13): warning STL4038: The contents of <charconv> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\expected(12): warning STL4038: The contents of <expected> are available only with C++23 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\memory_resource(13): warning STL4038: The contents of <memory_resource> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\optional(12): warning STL4038: The contents of <optional> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\ranges(12): warning STL4038: The contents of <ranges> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\span(13): warning STL4038: The contents of <span> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\spanstream(12): warning STL4038: The contents of <spanstream> are available only with C++23 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\stacktrace(13): warning STL4038: The contents of <stacktrace> are available only with C++23 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\string_view(13): warning STL4038: The contents of <string_view> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\syncstream(12): warning STL4038: The contents of <syncstream> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\variant(13): warning STL4038: The contents of <variant> are available only with C++17 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\__msvc_cxx_stdatomic.hpp(25): warning STL4038: The contents of <stdatomic.h> are available only with C++23 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\barrier(17): warning STL4038: The contents of <barrier> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\latch(17): warning STL4038: The contents of <latch> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\semaphore(17): warning STL4038: The contents of <semaphore> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\stop_token(13): warning STL4038: The contents of <stop_token> are available only with C++20 or later.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\execution(13): warning STL4038: The contents of <execution> are available only with C++17 or later.
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(38,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(214,45): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
   Code wird generiert.
-  3 of 17 functions (17.6%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  15 of 192 functions ( 7.8%) were compiled, the rest were copied from previous compilation.
+    12 functions were new in current compilation
+    29 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Q Learning.vcxproj -> C:\c++projekt\Gitschule\Schule\Schule\Release\Q Learning.exe
