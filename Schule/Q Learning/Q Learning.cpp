@@ -25,7 +25,7 @@ vector<string> explode(const string& delimiter, const string& explodeme);
 
 int main()
 {
-    int zeigen=2,labyrint;
+    int zeigen=2,labyrint,trainings=500;
     int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
@@ -44,22 +44,22 @@ int main()
     srand(time(nullptr)); // Initialize random seed
 
     cout << "Lernen anzeigen? 1 ja  2 nein" << endl;
-    cin >> zeigen;//zeigen der einzelnen Lernschritte zum verschnellern oder verlangsamen des programs
-    cout << "Labyrint einlesen oder wählen? 1 einlesen 2 voreingestellt 3 dateiladen" << endl;
+    cin >> zeigen;//zeigen der einzelnen Lernschritte zum Beschleunigen oder Verlangsamen des Programms
+    cout << "Labyrint einlesen oder waehlen? 1 einlesen 2 voreingestellt 3 dateiladen" << endl;
     cin >> labyrint;
     if (labyrint == 1) {
         system("CLS");//Löscht die Konsole
-        cout << "Wieviele Felder hat dein Labyrint?" << endl;
+        cout << "Wieviele Felder hat dein Labyrinth?" << endl;
         cout << "Felder: ";
-        cin >> felder;//weiviele felder das labyrint hat
+        cin >> felder;//Wieviele Felder das Labyrinth hat
         finalewerte = to_string(felder);
         system("CLS");//Löscht die Konsole
-        cout << "Wenn fertig " << felder  << " eingeben" << endl;
-        cout << "Um feld anzuzeigen " << felder + 1 << " eingeben" << endl;
+        cout << "Wenn keine weiteren Verbindungen vorhanden mit " << felder  << " Bestätigen" << endl;
+        cout << "Um Feld anzuzeigen " << felder + 1 << " eingeben" << endl;
 
         for (int i = 0; i < felder; i++)
         {
-            cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;//Mit welchem feld welches feld verbunden ist
+            cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;//Mit welchem Feld welches Feld verbunden ist
             
             do
             {
@@ -70,7 +70,7 @@ int main()
                     continue;
                 }
                 rMatrix[i][verbunden] = 0.0;//moeglich
-                rMatrix[verbunden][i] = 0.0;//auch in die andere richtung
+                rMatrix[verbunden][i] = 0.0;//auch in die andere Richtung
                 finalewerte += "|";
                 finalewerte += to_string(i) + "-" + to_string(verbunden);
             } while (true);
@@ -78,7 +78,7 @@ int main()
             
         }
  
-        cout << "Speichern 1 ja 2 nein" << endl;
+        cout << "Speichern: 1 ja 2 nein" << endl;
         cin >> t;
         if (t == 1) {
             cout << "Dateiname: ";
@@ -107,7 +107,7 @@ int main()
                 if ((i == 0 && j == 1) || (i == 1 && j == 5) || (i == 5 && j == 6) || (i == 5 && j == 4) || (i == 1 && j == 2) || (i == 2 && j == 3) || (i == 2 && j == 7) || (i == 4 && j == 7) || (i == 1 && j == 4) || (i == 2 && j == 7) || (i == 4 && j == 7))
                 {
                     rMatrix[i][j] = 0.0;//moeglich
-                    rMatrix[j][i] = 0.0;//auch in die andere richtung
+                    rMatrix[j][i] = 0.0;//auch in die andere Richtung
                 }
 
             }
@@ -135,15 +135,15 @@ int main()
         }
     }
 
-    cout << "Was soll das ziel sein:" << endl;
-    cin >> ziel;//devenition des ziel punktes
+    cout << "Was soll das Ziel sein:" << endl;
+    cin >> ziel;//Defenition des Zielpunktes
  
     for (int i = 0; i < felder; i++)
     {
         for (int j = 0; j < felder; j++)
         {
-            if (rMatrix[i][ziel] != -1)rMatrix[i][ziel] = 100.0;//wen es ne verbindung zum ziel gibt
-            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wen es das zeil ist
+            if (rMatrix[i][ziel] != -1)rMatrix[i][ziel] = 100.0;//wenn es eine Verbindung zum Ziel gibt
+            if (i == j && i == ziel)rMatrix[i][j] = 100.0;//wenn es das Ziel ist
         }
     }
     if (zeigen == 1) {
@@ -158,8 +158,10 @@ int main()
             cout << "\n";
         }
     }
+    cout << "Wie oft soll trainiert werden?" << endl;
+        cin >> trainings;
     // Training Q Matrix
-    for (int i = 0; i < 500; i++)
+    for (int i = 0; i < trainings; i++)
     {
         punkt = zufallszahl(felder);
         groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix,felder);
@@ -172,7 +174,7 @@ int main()
         if (zeigen == 1)cout << "\nScore : " << score;
     }
 
-    //Finden des maximums
+    //Finden des Maximums
     for (int i = 0; i < felder; i++)
     {
         for (int j = 0; j < felder; j++)
@@ -194,8 +196,8 @@ int main()
          cout << "\n";
     }
 
-    int punktt;//anfangspunkt
-    bool fehler = false;//für unmoegliche zuege
+    int punktt;//Anfangspunkt
+    bool fehler = false;//für unmoegliche Zuege
     int maxr = 0, maxinde = 0;
 
     if(labyrint==2)zeigekarte();
@@ -205,7 +207,7 @@ int main()
         maxr = 0;
         maxinde = 0;
      cout << "Eingabe des Anfangspunktes: ";
-     cin >> punktt;//eingabe des start punktes von wem zum ende navigiert werden soll
+     cin >> punktt;//Eingabe des Startpunktes von dem zum Ziel navigiert werden soll
 
     // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
      cout << "Weg: \n";
@@ -272,7 +274,7 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
     int j = 0, k = 0, index_of_max;
     double temp_max = 0.0, max_value = 0.0, sumA = 0.0;
 
-    //Einlesen der indexe wo max im punkt ist
+    //Einlesen der Indexe wo Maximum im Punkt ist
     for (int i = 0; i < felder; i++)
     {
         max_index[i] = 0;
@@ -291,14 +293,14 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
         }
     }
 
-    //Auswahl einer zufälligen Zahl as dem maximum
+    //Auswahl einer zufälligen Zahl aus dem Maximum
     int a = zufallszahl(felder) % j;
     index_of_max = max_index[a];
 
     max_value = qMatrix[aktion][index_of_max];
 
 
-    //Haupt update der Matrix
+    //Hauptupdate der Matrix
     qMatrix[punkt][aktion] = rMatrix[punkt][aktion] + (gammaLR * max_value);
     temp_max = 0.0;
     for (int i = 0; i < felder; i++)
@@ -401,7 +403,7 @@ vector<string> explode(const string& delimiter, const string& str)
 /*
 Der Code besteht aus einer main-Funktion und mehreren Hilfsfunktionen. Die main-Funktion enthält den Hauptablauf des Q-Learning-Algorithmus. Es werden eine Q-Matrix, eine R-Matrix (Points Matrix) und andere Variablen initialisiert. Die R-Matrix enthält Belohnungen für den Übergang zwischen Zuständen.
 
-Der Algorithmus trainiert die Q-Matrix durch wiederholtes Auswählen einer zufälligen Startposition, Auswahl einer zufälligen Aktion und Aktualisierung der Q-Matrix basierend auf den erzielten Belohnungen. Dieser Trainingsprozess wird 500 Mal wiederholt. Nach dem Training wird die trainierte Q-Matrix ausgegeben.
+Der Algorithmus trainiert die Q-Matrix durch wiederholtes Auswählen einer zufälligen Startposition, Auswahl einer zufälligen Aktion und Aktualisierung der Q-Matrix basierend auf den erzielten Belohnungen. Dieser Trainingsprozess wird x Mal wiederholt. Nach dem Training wird die trainierte Q-Matrix ausgegeben.
 
 Schließlich wird der Pfad basierend auf der trainierten Q-Matrix gefunden, indem der Zustand schrittweise aktualisiert wird, bis der Zielzustand erreicht ist.
 
