@@ -13,7 +13,7 @@
 
 using namespace std;
 // Deklaration der globalen Variablen und Funktionen
-constexpr auto simo = 8;
+constexpr auto simo = 100;
 double qMatrix[simo][simo], gammaLR = 0.8; // Q-Matrix und der Discount-Faktor gamma (Learning Rate)
 int max_index[simo], erlaubteAktion[simo]; // Hilfsarrays für den maximalen Index und verfügbare Aktionen
 void ausgabearray(double a[][simo],int felder); // Funktion zur Ausgabe eines Arrays
