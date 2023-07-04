@@ -86,7 +86,6 @@ int main()
             fini = "saves\\";
             fini += datein;
             fini += ".txt";
-            cout << fini<<endl;
             ofstream MyReadFile(fini);
             MyReadFile << finalewerte;
             MyReadFile.close();
@@ -127,7 +126,6 @@ int main()
         cout << in<<endl;
         vector<string> inn = explode("|", in);
         felder = stoi(inn[0]);
-        cout << size(inn) - 1 << endl;
         for (int u = 1; u <= size(inn)-1; u++)
         {
             vector<string> innn = explode("-", inn[u]);
