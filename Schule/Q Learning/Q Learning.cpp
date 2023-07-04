@@ -3,7 +3,12 @@
 #include <cstdlib>
 #include <fstream>
 #include <cstring>
-#include <__msvc_all_public_headers.hpp>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string>
+
 
 
 using namespace std;
@@ -16,6 +21,7 @@ int zufallszahl(int felder); // Funktion, die eine zufällige Zahl von 0 bis 7 zu
 double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen,int felder); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo],int felder); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();//zeigt das labyrint
+vector<string> explode(const string& delimiter, const string& explodeme);
 
 int main()
 {
@@ -25,7 +31,7 @@ int main()
     int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
     double final_max = 0.0, score = 0.0;  // Deklaration von final_max für das Finden des Maximums und des Punktestands
     double rMatrix[simo][simo];//-1 sind unmögliche verbindungen sinn:[von][nach]
-    string fini, datein;//zum speichern
+    string fini, datein,finalewerte,in;//zum speichern
 
     for (int i = 0; i < simo; i++){
         for (int j = 0; j < simo; j++) {
@@ -46,7 +52,10 @@ int main()
         cout << "Wieviele Felder hat dein Labyrint?" << endl;
         cout << "Felder: ";
         cin >> felder;//weiviele felder das labyrint hat
-        cout << "Wenn fertig " << felder + 1 << " eingeben" << endl;
+        finalewerte = to_string(felder);
+        cout << "Wenn fertig " << felder  << " eingeben" << endl;
+        cout << "Um feld anzuzeigen " << felder + 1 << " eingeben" << endl;
+
         for (int i = 0; i < felder; i++)
         {
             cout << "Mit welchen Feldern ist " << i << " verbunden?" << endl;//Mit welchem feld welches feld verbunden ist
@@ -54,9 +63,16 @@ int main()
             do
             {
                 cin >> verbunden;
+                if (verbunden == felder)break;
+                else if (verbunden > felder) {
+                    cout << finalewerte << endl;
+                    continue;
+                }
                 rMatrix[i][verbunden] = 0.0;//moeglich
                 rMatrix[verbunden][i] = 0.0;//auch in die andere richtung
-            } while (verbunden<felder);
+                finalewerte += "|";
+                finalewerte += to_string(i) + "-" + to_string(verbunden);
+            } while (true);
                 
             
         }
@@ -69,18 +85,11 @@ int main()
 
             fini = "saves\\";
             fini += datein;
-            fini += ".bin";
-            ofstream outputFile(fini, std::ios::out | std::ios::binary);
-            outputFile.write(reinterpret_cast<char*>(rMatrix), simo * simo * sizeof(double));
-            outputFile.close();
-            fini = "saves\\";
-            fini += datein;
-            fini += "f.bin";
-            ofstream outputFilee(fini, std::ios::out | std::ios::binary);
-            outputFilee.seekp(0, ios::beg);
-            outputFilee.write(reinterpret_cast<const char*>(to_string(felder).c_str()), sizeof(int));
-            outputFilee.close();
-
+            fini += ".txt";
+            cout << fini<<endl;
+            ofstream MyReadFile(fini);
+            MyReadFile << finalewerte;
+            MyReadFile.close();
            
         }
     }
@@ -109,19 +118,22 @@ int main()
         system("CLS");//Löscht die Konsole
         cout << "Dateiname: ";
         cin >> datein;
-
-        fini = "saves";
+        fini = "saves\\";
         fini += datein;
-        fini += ".bin";
-        ifstream inputFile(fini, std::ios::in | std::ios::binary);
-        inputFile.read(reinterpret_cast<char*>(rMatrix), simo * simo * sizeof(double));
-        inputFile.close();
-        fini = "saves";
-        fini += datein;
-        fini += "f.bin";
-        ifstream inputFilee(fini, std::ios::in | std::ios::binary);
-        inputFilee.read(reinterpret_cast<char*>(felder),  sizeof(int));
-        inputFilee.close();
+        fini += ".txt";
+        ifstream MyReadFilee(fini);
+        getline(MyReadFilee, in);
+        MyReadFilee.close();
+        cout << in<<endl;
+        vector<string> inn = explode("|", in);
+        felder = stoi(inn[0]);
+        cout << size(inn) - 1 << endl;
+        for (int u = 1; u <= size(inn)-1; u++)
+        {
+            vector<string> innn = explode("-", inn[u]);
+            rMatrix[stoi(innn[0])][stoi(innn[1])] = 0.0;
+            rMatrix[stoi(innn[1])][stoi(innn[0])] = 0.0;
+        }
     }
 
     cout << "Was soll das ziel sein:" << endl;
@@ -356,6 +368,36 @@ void zeigekarte() {
     cout << "              \\      +---+" << endl;
     cout << "               +-----| 7 |" << endl;
     cout << "                     +---+" << endl;
+}
+vector<string> explode(const string& delimiter, const string& str)
+{
+    vector<string> arr;
+
+    int strleng = str.length();
+    int delleng = delimiter.length();
+    if (delleng == 0)
+        return arr;
+
+    int i = 0;
+    int k = 0;
+    while (i < strleng)
+    {
+        int j = 0;
+        while (i + j < strleng && j < delleng && str[i + j] == delimiter[j])
+            j++;
+        if (j == delleng)
+        {
+            arr.push_back(str.substr(k, i - k));
+            i += delleng;
+            k = i;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    arr.push_back(str.substr(k, i - k));
+    return arr;
 }
 /*
 Der Code besteht aus einer main-Funktion und mehreren Hilfsfunktionen. Die main-Funktion enthält den Hauptablauf des Q-Learning-Algorithmus. Es werden eine Q-Matrix, eine R-Matrix (Points Matrix) und andere Variablen initialisiert. Die R-Matrix enthält Belohnungen für den Übergang zwischen Zuständen.
