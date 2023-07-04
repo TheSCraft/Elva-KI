@@ -53,6 +53,7 @@ int main()
         cout << "Felder: ";
         cin >> felder;//weiviele felder das labyrint hat
         finalewerte = to_string(felder);
+        system("CLS");//Löscht die Konsole
         cout << "Wenn fertig " << felder  << " eingeben" << endl;
         cout << "Um feld anzuzeigen " << felder + 1 << " eingeben" << endl;
 
