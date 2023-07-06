@@ -1,0 +1,3 @@
+﻿  test.cpp
+MSVCRT.lib(exe_main.obj) : error LNK2001: Nicht aufgelöstes externes Symbol "_main".
+C:\c++projekt\Gitschule\Schule\Schule\Release\test.exe : fatal error LNK1120: 1 nicht aufgelöste Externe

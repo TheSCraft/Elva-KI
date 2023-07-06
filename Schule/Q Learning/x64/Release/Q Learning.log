@@ -1,0 +1,10 @@
+﻿  Q Learning.cpp
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(44,15): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(227,45): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(377,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Gitschule\Schule\Schule\Q Learning\Q Learning.cpp(378,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  Code wird generiert.
+  Previous IPDB not found, fall back to full compilation.
+  All 278 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  Q Learning.vcxproj -> C:\c++projekt\Gitschule\Schule\Schule\x64\Release\Q Learning.exe

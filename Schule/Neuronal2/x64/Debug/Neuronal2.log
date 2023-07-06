@@ -1,4 +1,5 @@
 ﻿  Neuronal2.cpp
-C:\c++projekt\Schule\Schule\Neuronal2\Neuronal2.cpp(439,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\c++projekt\Schule\Schule\Neuronal2\Neuronal2.cpp(440,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-  Neuronal2.vcxproj -> C:\c++projekt\Schule\Schule\x64\Debug\Neuronal2.exe
+C:\c++projekt\Gitschule\Schule\Schule\Neuronal2\Neuronal2.cpp(435,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Gitschule\Schule\Schule\Neuronal2\Neuronal2.cpp(436,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  LINK : C:\c++projekt\Gitschule\Schule\Schule\x64\Debug\Neuronal2.exe wurde nicht gefunden oder beim letzten inkrementellen Linkvorgang nicht erstellt; vollständiger Link wird durchgeführt.
+  Neuronal2.vcxproj -> C:\c++projekt\Gitschule\Schule\Schule\x64\Debug\Neuronal2.exe

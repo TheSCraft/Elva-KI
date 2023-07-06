@@ -1,0 +1,8 @@
+﻿  Neuronal2.2.cpp
+C:\c++projekt\Gitschule\Schule\Schule\Neuronal2.2\Neuronal2.2.cpp(525,31): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\c++projekt\Gitschule\Schule\Schule\Neuronal2.2\Neuronal2.2.cpp(526,37): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  Code wird generiert.
+  Previous IPDB not found, fall back to full compilation.
+  All 182 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  Neuronal2.2.vcxproj -> C:\c++projekt\Gitschule\Schule\Schule\x64\Release\Neuronal2.2.exe
