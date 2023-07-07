@@ -21,6 +21,8 @@ int zufallszahl(int felder); // Funktion, die eine zufällige Zahl von 0 bis 7 zu
 double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen,int felder); // Funktion zur Aktualisierung der Q-Matrix
 int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo],int felder); // Funktion zur Ermittlung verfügbarer Aktionen
 void zeigekarte();//zeigt das labyrint
+void training(int felder, double rMatrix[][simo],int zeigen);
+bool wegfinden(int ziel,int punktt,int felder, bool z);
 vector<string> explode(const string& delimiter, const string& explodeme);
 
 int main()
@@ -28,8 +30,7 @@ int main()
     int zeigen=2,labyrint,trainings=500;
     int t;//temp
     int ziel = 7;  // Deklaration der Anfangs- und Endzustände
-    int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
-    double final_max = 0.0, score = 0.0;  // Deklaration von final_max für das Finden des Maximums und des Punktestands
+    double final_max = 0.0;  // Deklaration von final_max für das Finden des Maximums
     double rMatrix[simo][simo];//-1 sind unmögliche verbindungen sinn:[von][nach]
     string fini, datein,finalewerte,in;//zum speichern
 
@@ -158,20 +159,31 @@ int main()
             cout << "\n";
         }
     }
-    cout << "Wie oft soll trainiert werden?" << endl;
+    cout << "Wie oft soll trainiert werden? -1 für smartlearn" << endl;
         cin >> trainings;
     // Training Q Matrix
     for (int i = 0; i < trainings; i++)
     {
-        punkt = zufallszahl(felder);
-        groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix,felder);
-        aktion = erlaubteAktion[zufallszahl(felder) % groesemoeglicheraktionen];
+        training(felder, rMatrix, zeigen);
 
-        if (zeigen == 1)cout << "\nNaechster Schritt: " << aktion << "\n";
-        score = update(punkt, aktion, rMatrix, qMatrix,zeigen,felder);
-
-
-        if (zeigen == 1)cout << "\nScore : " << score;
+    }
+    if (trainings == -1) {
+        cout << "Nach wievielen durchgängen soll geprüft werden?" << endl;
+        cin >> trainings;
+        for (int n = 0; n <=(felder*trainings); n++)
+        {
+            training(felder, rMatrix, zeigen);
+            if (n == felder*trainings) {
+                for (int e = 0; e < felder; e++)
+                {
+                    
+                    if (!wegfinden(ziel, e, felder, false)) {
+                        n = 0;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     //Finden des Maximums
@@ -197,60 +209,15 @@ int main()
     }
 
     int punktt;//Anfangspunkt
-    bool fehler = false;//für unmoegliche Zuege
-    int maxr = 0, maxinde = 0;
+
 
     if(labyrint==2)zeigekarte();
     while(true){
         int visited[simo] = { 0 };
-        fehler = false;
-        maxr = 0;
-        maxinde = 0;
      cout << "Eingabe des Anfangspunktes: ";
      cin >> punktt;//Eingabe des Startpunktes von dem zum Ziel navigiert werden soll
-
-    // Ausgabe des Pfads basierend auf der trainierten Q-Matrix
-     cout << "Weg: \n";
-    while (visited[ziel] != 1)
-    {
-         cout << punktt << "-> ";
-        maxr = 0;
-        maxinde = 0;
-
-        for (int i = 0; i < felder; i++)
-        {
-            if (visited[i] == 0)
-            {
-                if (qMatrix[punktt][i] > maxr)
-                {
-                    maxinde = i;
-                    maxr = qMatrix[punktt][i];
-                }
-            }
-        }
-
-        punktt = maxinde;
-        visited[maxinde] = 1;
-        if (maxr == 0)
-        {
-            fehler = true;
-            break;
-        }
-
-        if (punktt == ziel)
-        {
-            break;
-        }
-    }
-
-    if (fehler)
-    {
-         cout << " | Da ist kein Weg ab hier\n";
-    }
-    else
-    {
-         cout << punktt << " ist der kuerzeste Weg\n";
-    }
+     wegfinden(ziel, punktt, felder,true);
+   
 }
 }
 
@@ -268,7 +235,6 @@ int erlaubteAktionen(int state, int erlaubteAktion[], double rMatrix[][simo],int
     }
     return k;
 }
-
 double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][simo],int zeigen,int felder)
 {
     int j = 0, k = 0, index_of_max;
@@ -335,12 +301,10 @@ double update(int punkt, int aktion, double rMatrix[][simo], double qMatrix[][si
         return 0.0;
     }
 }
-
 int zufallszahl(int felder)
 {
     return rand() % felder;
 }
-
 void ausgabearray(double a[][simo],int felder)
 {
 
@@ -369,6 +333,66 @@ void zeigekarte() {
     cout << "              \\      +---+" << endl;
     cout << "               +-----| 7 |" << endl;
     cout << "                     +---+" << endl;
+}
+void training(int felder, double rMatrix[][simo],int zeigen) {
+    int punkt, groesemoeglicheraktionen, aktion;  // Deklaration von aktuellen Zustand, Größe der verfügbaren Aktionen und ausgewählter Aktion
+    int score = 0;
+    punkt = zufallszahl(felder);
+    groesemoeglicheraktionen = erlaubteAktionen(punkt, erlaubteAktion, rMatrix, felder);
+    aktion = erlaubteAktion[zufallszahl(felder) % groesemoeglicheraktionen];
+
+    if (zeigen == 1)cout << "\nNaechster Schritt: " << aktion << "\n";
+    score = update(punkt, aktion, rMatrix, qMatrix, zeigen, felder);
+
+
+    if (zeigen == 1)cout << "\nScore : " << score;
+}
+bool wegfinden(int ziel,int punktt,int felder,bool z) {
+    int visited[simo] = { 0 };
+    bool fehler = false;
+    if(z)cout << "Weg: \n";
+    while (visited[ziel] != 1)
+    {
+        if(z)cout << punktt << "-> ";
+        int maxr = 0;
+        int maxinde = 0;
+
+        for (int i = 0; i < felder; i++)
+        {
+            if (visited[i] == 0)
+            {
+                if (qMatrix[punktt][i] > maxr)
+                {
+                    maxinde = i;
+                    maxr = qMatrix[punktt][i];
+                }
+            }
+        }
+
+        punktt = maxinde;
+        visited[maxinde] = 1;
+        if (maxr == 0)
+        {
+            fehler = true;
+            break;
+        }
+
+        if (punktt == ziel)
+        {
+            break;
+        }
+    }
+
+    if (fehler)
+    {
+        if(z)cout << " | Da ist kein Weg ab hier\n";
+        return false;
+    }
+    else
+    {
+        if(z)cout << punktt << " ist der kuerzeste Weg\n";
+        return true;
+    }
 }
 vector<string> explode(const string& delimiter, const string& str)
 {
